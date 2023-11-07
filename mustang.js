@@ -23,17 +23,65 @@ window.onload = function init() {
     // 컨트롤
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-    // 배경 정육면체 생성
-    const geometry = new THREE.BoxGeometry(200, 95, 100); // 크기
-    const material = new THREE.MeshBasicMaterial({ // 질감
+    // 시작 배경 정육면체 생성
+    const primaryGeometry = new THREE.BoxGeometry(200, 95, 100); // 크기
+    const primaryMaterial = new THREE.MeshBasicMaterial({ // 질감
         color: 0x000000,
         side: THREE.BackSide
     });
-    const cube = new THREE.Mesh(geometry, material); // 정육면체 생성
-    cube.position.x = 5; 
-    cube.position.y = 42; 
-    cube.position.z = -290;
-    scene.add(cube); // 씬에 추가
+    const primaryBackground = new THREE.Mesh(primaryGeometry, primaryMaterial); // 정육면체 생성
+    primaryBackground.position.x = 5; 
+    primaryBackground.position.y = 42; 
+    primaryBackground.position.z = -290;
+    scene.add(primaryBackground); // 씬에 추가
+
+    // 에레브 배경 정육면체 생성
+    const ereveGeometry = new THREE.BoxGeometry(200, 95, 80); // 크기
+    const ereveMaterial = new THREE.MeshBasicMaterial({ // 질감
+        color: 0x00ff00,
+        side: THREE.BackSide
+    });
+    const ereveBackground = new THREE.Mesh(ereveGeometry, ereveMaterial); // 정육면체 생성
+    ereveBackground.position.x = 5; 
+    ereveBackground.position.y = 42; 
+    ereveBackground.position.z = -200;
+    scene.add(ereveBackground); // 씬에 추가
+
+    // 커닝시티 배경 정육면체 생성
+    const kerningGeometry = new THREE.BoxGeometry(200, 95, 65); // 크기
+    const kerningMaterial = new THREE.MeshBasicMaterial({ // 질감
+        color: 0x0000ff,
+        side: THREE.BackSide
+    });
+    const kerningBackground = new THREE.Mesh(kerningGeometry, kerningMaterial); // 정육면체 생성
+    kerningBackground.position.x = 5; 
+    kerningBackground.position.y = 42; 
+    kerningBackground.position.z = -127;
+    scene.add(kerningBackground); // 씬에 추가
+
+     // 엘리니아 배경 정육면체 생성
+     const eliniaGeometry = new THREE.BoxGeometry(200, 95, 95); // 크기
+     const eliniaMaterial = new THREE.MeshBasicMaterial({ // 질감
+         color: 0xff00ff,
+         side: THREE.BackSide
+     });
+     const eliniaBackground = new THREE.Mesh(eliniaGeometry, eliniaMaterial); // 정육면체 생성
+     eliniaBackground.position.x = 5; 
+     eliniaBackground.position.y = 42; 
+     eliniaBackground.position.z = -47;
+     scene.add(eliniaBackground); // 씬에 추가
+
+     // 아쿠아로드 배경 정육면체 생성
+     const aquaGeometry = new THREE.BoxGeometry(200, 95, 80); // 크기
+     const aquaMaterial = new THREE.MeshBasicMaterial({ // 질감
+         color: 0xffff00,
+         side: THREE.BackSide
+     });
+     const aquaBackground = new THREE.Mesh(aquaGeometry, aquaMaterial); // 정육면체 생성
+     aquaBackground.position.x = 5; 
+     aquaBackground.position.y = 42; 
+     aquaBackground.position.z = 40;
+     scene.add(aquaBackground); // 씬에 추가
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.1 ); // Light color changed to white
     scene.add(ambientLight);
