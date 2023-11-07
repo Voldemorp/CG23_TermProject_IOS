@@ -3,19 +3,37 @@ window.onload = function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    // 렌더러
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.setSize(canvas.width, canvas.height);
 
+    // 씬
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
-    const camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
-    camera.rotation.y = 45 / 180 * Math.PI;
-    camera.position.x = 150;
-    camera.position.y = 150;
-    camera.position.z = 150;
+    // 카메라
+    // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
+    const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 1000);
+    // camera.rotation.x = 125 / 180 * Math.PI;
+    // camera.rotation.y = 90 / 180 * Math.PI;
+    camera.position.x = 12;
+    camera.position.y = 10;
+    camera.position.z = -370;
 
+    // 컨트롤
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    // 배경 정육면체 생성
+    const geometry = new THREE.BoxGeometry(200, 95, 100); // 크기
+    const material = new THREE.MeshBasicMaterial({ // 질감
+        color: 0x000000,
+        side: THREE.BackSide
+    });
+    const cube = new THREE.Mesh(geometry, material); // 정육면체 생성
+    cube.position.x = 5; 
+    cube.position.y = 42; 
+    cube.position.z = -290;
+    scene.add(cube); // 씬에 추가
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.1 ); // Light color changed to white
     scene.add(ambientLight);
