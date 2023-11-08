@@ -22,67 +22,211 @@ window.onload = function init() {
 
     // 컨트롤
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.minDistance = 1; // 최소 줌 거리   
+    controls.maxDistance = 1000; // 최대 줌 거리
+    controls.update();
 
-    // 시작 배경 정육면체 생성
-    const primaryGeometry = new THREE.BoxGeometry(200, 95, 100); // 크기
-    const primaryMaterial = new THREE.MeshBasicMaterial({ // 질감
-        color: 0x000000,
-        side: THREE.BackSide
-    });
-    const primaryBackground = new THREE.Mesh(primaryGeometry, primaryMaterial); // 정육면체 생성
-    primaryBackground.position.x = 5; 
-    primaryBackground.position.y = 42; 
+    // ----------시작 배경---------- //
+
+    // 정육면체 생성
+    const primaryGeometry = new THREE.BoxGeometry(64, 46, 100);
+
+    // 텍스쳐 배열 선언
+    const primaryTextureArr = []; 
+
+    // 텍스쳐 생성
+    const primaryTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
+    const primaryTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const primaryTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const primaryTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
+    const primaryTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
+    const primaryTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+    
+    // 배열에 각각의 텍스쳐 추가
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_ft}));
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_bk}));
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_up}));
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_dn}));
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_rt}));
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_lf}));
+
+    // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
+    for (let i = 0; i < 6; i++) { primaryTextureArr[i].side = THREE.BackSide; }
+
+    // 배경으로 사용할 정육면체 생성
+    const primaryBackground = new THREE.Mesh(primaryGeometry, primaryTextureArr); 
+
+    // 정육면체 위치 조정
+    primaryBackground.position.x = 4; 
+    primaryBackground.position.y = 18.8; 
     primaryBackground.position.z = -290;
-    scene.add(primaryBackground); // 씬에 추가
 
-    // 에레브 배경 정육면체 생성
-    const ereveGeometry = new THREE.BoxGeometry(200, 95, 80); // 크기
-    const ereveMaterial = new THREE.MeshBasicMaterial({ // 질감
-        color: 0x00ff00,
-        side: THREE.BackSide
-    });
-    const ereveBackground = new THREE.Mesh(ereveGeometry, ereveMaterial); // 정육면체 생성
-    ereveBackground.position.x = 5; 
-    ereveBackground.position.y = 42; 
+    // 씬에 추가
+    scene.add(primaryBackground); 
+
+    // ----------시작 배경 끝---------- //
+
+    // ----------에레브 배경 시작---------- //
+
+    // 정육면체 생성
+    const ereveGeometry = new THREE.BoxGeometry(64, 46, 80); // 크기
+
+    // 텍스쳐 배열 선언
+    const ereveTextureArr = []; 
+
+    // 텍스쳐 생성
+    const ereveTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
+    const ereveTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const ereveTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const ereveTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
+    const ereveTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
+    const ereveTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+    
+    // 배열에 각각의 텍스쳐 추가
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_ft}));
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_bk}));
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_up}));
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_dn}));
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_rt}));
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_lf}));
+
+    // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
+    for (let i = 0; i < 6; i++) { ereveTextureArr[i].side = THREE.BackSide; }
+
+    // 배경으로 사용할 정육면체 생성
+    const ereveBackground = new THREE.Mesh(ereveGeometry, ereveTextureArr); 
+
+    // 정육면체 위치 조정
+    ereveBackground.position.x = 4; 
+    ereveBackground.position.y = 18.8; 
     ereveBackground.position.z = -200;
-    scene.add(ereveBackground); // 씬에 추가
 
-    // 커닝시티 배경 정육면체 생성
-    const kerningGeometry = new THREE.BoxGeometry(200, 95, 65); // 크기
-    const kerningMaterial = new THREE.MeshBasicMaterial({ // 질감
-        color: 0x0000ff,
-        side: THREE.BackSide
-    });
-    const kerningBackground = new THREE.Mesh(kerningGeometry, kerningMaterial); // 정육면체 생성
-    kerningBackground.position.x = 5; 
-    kerningBackground.position.y = 42; 
+    // 씬에 추가
+    scene.add(ereveBackground); 
+
+    // ----------에레브 배경 끝---------- //
+
+    // ----------커닝시티 배경 시작---------- //
+
+    // 정육면체 생성
+    const kerningGeometry = new THREE.BoxGeometry(64, 46, 65);
+
+   // 텍스쳐 배열 선언
+   const kerningTextureArr = []; 
+
+   // 텍스쳐 생성
+   const kerningTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
+   const kerningTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+   const kerningTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+   const kerningTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
+   const kerningTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
+   const kerningTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+   
+   // 배열에 각각의 텍스쳐 추가
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_ft}));
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_bk}));
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_up}));
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_dn}));
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_rt}));
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_lf}));
+
+   // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
+   for (let i = 0; i < 6; i++) { kerningTextureArr[i].side = THREE.BackSide; }
+
+    // 배경으로 사용할 정육면체 생성
+    const kerningBackground = new THREE.Mesh(kerningGeometry, kerningTextureArr); 
+
+    // 정육면체 위치 조정
+    kerningBackground.position.x = 4; 
+    kerningBackground.position.y = 18.8; 
     kerningBackground.position.z = -127;
-    scene.add(kerningBackground); // 씬에 추가
 
-     // 엘리니아 배경 정육면체 생성
-     const eliniaGeometry = new THREE.BoxGeometry(200, 95, 95); // 크기
-     const eliniaMaterial = new THREE.MeshBasicMaterial({ // 질감
-         color: 0xff00ff,
-         side: THREE.BackSide
-     });
-     const eliniaBackground = new THREE.Mesh(eliniaGeometry, eliniaMaterial); // 정육면체 생성
-     eliniaBackground.position.x = 5; 
-     eliniaBackground.position.y = 42; 
-     eliniaBackground.position.z = -47;
-     scene.add(eliniaBackground); // 씬에 추가
+    // 씬에 추가
+    scene.add(kerningBackground); 
 
-     // 아쿠아로드 배경 정육면체 생성
-     const aquaGeometry = new THREE.BoxGeometry(200, 95, 80); // 크기
-     const aquaMaterial = new THREE.MeshBasicMaterial({ // 질감
-         color: 0xffff00,
-         side: THREE.BackSide
-     });
-     const aquaBackground = new THREE.Mesh(aquaGeometry, aquaMaterial); // 정육면체 생성
-     aquaBackground.position.x = 5; 
-     aquaBackground.position.y = 42; 
-     aquaBackground.position.z = 40;
-     scene.add(aquaBackground); // 씬에 추가
+    // ----------커닝시티 배경 끝---------- //
 
+    // ----------엘리니아 배경 시작---------- //
+
+    // 정육면체 생성
+    const eliniaGeometry = new THREE.BoxGeometry(64, 46, 95);
+
+    // 텍스쳐 배열 선언
+    const eliniaTextureArr = []; 
+
+    // 텍스쳐 생성
+    const eliniaTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
+    const eliniaTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const eliniaTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const eliniaTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
+    const eliniaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
+    const eliniaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+   
+    // 배열에 각각의 텍스쳐 추가
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_ft}));
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_bk}));
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_up}));
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_dn}));
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_rt}));
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_lf}));
+
+    // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
+    for (let i = 0; i < 6; i++) { eliniaTextureArr[i].side = THREE.BackSide; }
+
+    // 배경으로 사용할 정육면체 생성
+    const eliniaBackground = new THREE.Mesh(eliniaGeometry, eliniaTextureArr); // 정육면체 생성
+
+    // 정육면체 위치 조정
+    eliniaBackground.position.x = 4; 
+    eliniaBackground.position.y = 18.8; 
+    eliniaBackground.position.z = -47;
+
+    // 씬에 추가
+    scene.add(eliniaBackground); 
+
+    // ----------엘리니아 배경 끝---------- //
+
+    // ----------아쿠아로드 배경 시작---------- //
+
+    // 정육면체 생성
+    const aquaGeometry = new THREE.BoxGeometry(64, 46, 80);
+
+    // 텍스쳐 배열 선언
+    const aquaTextureArr = []; 
+
+    // 텍스쳐 생성
+    const aquaTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
+    const aquaTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const aquaTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const aquaTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
+    const aquaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
+    const aquaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+   
+    // 배열에 각각의 텍스쳐 추가
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_ft}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_bk}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_up}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_dn}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_rt}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_lf}));
+
+    // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
+    for (let i = 0; i < 6; i++) { aquaTextureArr[i].side = THREE.BackSide; }
+ 
+    // 배경으로 사용할 정육면체 생성
+    const aquaBackground = new THREE.Mesh(aquaGeometry, aquaTextureArr);
+
+    // 정육면체 위치 조정
+    aquaBackground.position.x = 4; 
+    aquaBackground.position.y = 18.8; 
+    aquaBackground.position.z = 40;
+
+    // 씬에 추가
+    scene.add(aquaBackground); 
+
+    // ----------아쿠아로드 배경 끝---------- //
+
+    // 밝기 조정
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.1 ); // Light color changed to white
     scene.add(ambientLight);
 
@@ -90,6 +234,7 @@ window.onload = function init() {
     pointLight.position.set(0, 1000, 1000);
     scene.add(pointLight);
 
+    // 블렌더 맵 로드
     const loader = new THREE.GLTFLoader();
     loader.load('./model/scene.gltf', function (gltf) {
         const car = gltf.scene.children[0];
