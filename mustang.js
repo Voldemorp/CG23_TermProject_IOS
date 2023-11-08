@@ -266,28 +266,28 @@ window.onload = function init() {
     //   });
     // 카메라의 현재 위치를 가져옵니다.
     // 카메라 위치를 기준으로 어떤 노래를 재생할지 결정합니다.
-    let audioFilePath;
-    if (camera.position.x < 50 && camera.position.y < 50 && camera.position.z < 50) {
-        audioFilePath = './model/audio/AquaRoad.mp3'; // 첫 번째 노래 파일 경로
-    } else {
-        audioFilePath = './model/audio/Elinia.mp3'; // 두 번째 노래 파일 경로
-    }
+    // let audioFilePath;
+    // if (camera.position.x < 50 && camera.position.y < 50 && camera.position.z < 50) {
+    //     audioFilePath = './model/audio/AquaRoad.mp3'; // 첫 번째 노래 파일 경로
+    // } else {
+    //     audioFilePath = './model/audio/Elinia.mp3'; // 두 번째 노래 파일 경로
+    // }
     
-    // 사용자 동작 이후에 오디오 컨텍스트 생성
-    document.addEventListener('click', function() {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    // // 사용자 동작 이후에 오디오 컨텍스트 생성
+    // document.addEventListener('click', function() {
+    //     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     
-        // 오디오 로딩 및 재생
-        const audioLoader = new THREE.AudioLoader();
-        audioLoader.load(audioFilePath, function(buffer) {
-            const listener = new THREE.AudioListener();
-            const sound = new THREE.Audio(listener);
-            sound.setBuffer(buffer);
-            sound.setLoop(true);
-            sound.setVolume(0.5);
-            sound.play();
-        });
-    });
+    //     // 오디오 로딩 및 재생
+    //     const audioLoader = new THREE.AudioLoader();
+    //     audioLoader.load(audioFilePath, function(buffer) {
+    //         const listener = new THREE.AudioListener();
+    //         const sound = new THREE.Audio(listener);
+    //         sound.setBuffer(buffer);
+    //         sound.setLoop(true);
+    //         sound.setVolume(0.5);
+    //         sound.play();
+    //     });
+    // });
     
     window.addEventListener('mousedown', onDocumentMouseDown, false);
     function onDocumentMouseDown(event) {
@@ -349,6 +349,11 @@ window.onload = function init() {
     document.addEventListener('keyup', (event) => {
         handleKeyUp(event);
     });
+    let sound;
+    const audioLoader = new THREE.AudioLoader();
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    let audioFilePath = ''; // 현재 재생 중인 오디오 파일 경로
+
     
     function handleKeyDown(event) {
         const code = event.code;
@@ -361,7 +366,45 @@ window.onload = function init() {
         } else if (code === 'KeyD') {
             movement.right = true;
         }
+    
+        // 카메라 좌표를 로그에 출력
+        const cameraPositionInWorld = camera.position.clone().unproject(camera);
+        console.log(`카메라 위치: X: ${cameraPositionInWorld.x}, Y: ${cameraPositionInWorld.y}, Z: ${cameraPositionInWorld.z}`);
+    
+        let newAudioFilePath = '';
+
+        // X좌표가 10보다 작을 경우 노래 재생
+        if(cameraPositionInWorld.y < 10.0033&&cameraPositionInWorld.z < -266.13) {
+            newAudioFilePath = './model/audio/Title.mp3';
+        } else if(cameraPositionInWorld.y < 10.0055&&cameraPositionInWorld.z < -168) {
+            newAudioFilePath = './model/audio/Ereve.mp3';
+        }else if(cameraPositionInWorld.y < 10.0082&&cameraPositionInWorld.z < -111) {
+            newAudioFilePath = './model/audio/KerningCity.mp3';
+        }else if(cameraPositionInWorld.y < 10.0420&&cameraPositionInWorld.z < -19.99) {
+            newAudioFilePath = './model/audio/Elinia.mp3';
+        }else
+        newAudioFilePath='./model/audio/AquaRoad.mp3';
+    
+        // 현재 재생 중인 노래가 있는 경우 종료하지 않음
+    if (sound && newAudioFilePath !== audioFilePath) {
+        sound.stop();
+        audioFilePath = '';
     }
+
+        // 새로운 노래 재생
+    if (newAudioFilePath !== audioFilePath) {
+        audioFilePath = newAudioFilePath;
+        audioLoader.load(audioFilePath, function (buffer) {
+            const listener = new THREE.AudioListener();
+            sound = new THREE.Audio(listener);
+            sound.setBuffer(buffer);
+            sound.setLoop(true);
+            sound.setVolume(0.5);
+            sound.play();
+        });
+    }
+    }
+    
     
     function handleKeyUp(event) {
         const code = event.code;
@@ -400,3 +443,4 @@ window.onload = function init() {
 
 
 }
+
