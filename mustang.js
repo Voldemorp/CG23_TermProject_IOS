@@ -16,16 +16,24 @@ window.onload = function init() {
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
     const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 3000);
     // camera.rotation.x = 125 / 180 * Math.PI;
-    // camera.rotation.y = 90 / 180 * Math.PI;
+    // camera.rotation.y =ZA 90 / 180 * Math.PI;
     camera.position.x = 12;
     camera.position.y = 30;
     camera.position.z = -1420;
 
-    // 컨트롤
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    // controls.minDistance = 1; // 최소 줌 거리   
-    // controls.maxDistance = 1000; // 최대 줌 거리
-    controls.update();
+camera.rotation.y = Math.PI; // 180도 회전
+
+const controls = new PointerLockControls( camera, document.body );
+
+// Pointer Lock를 사용한 마우스 클릭 이벤트 처리
+document.body.addEventListener("click", () => {
+    if (!controls.isLocked) {
+        controls.lock();
+    }
+});
+
+
+
 
     // 투명 텍스쳐 생성
     const transparentMaterial = new THREE.MeshStandardMaterial({
@@ -476,9 +484,39 @@ window.onload = function init() {
         }
     }
 
+    // // 마우스 이벤트 리스너 등록
+    // document.addEventListener('mousemove', onMouseMove);
+
+    // const mouse = new THREE.Vector2();
+    // const raycaster = new THREE.Raycaster();
+    // const target = new THREE.Vector3();
+    
+    // function onMouseMove(event) {
+    //     // 마우스 이벤트에서 정규화된 장치 좌표를 얻습니다.
+    //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    //     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+    //     // 레이캐스터를 사용하여 마우스 포인터의 3D 공간 좌표를 얻습니다.
+    //     raycaster.setFromCamera(mouse, camera);
+    //     const intersects = raycaster.intersectObject(scene, true);
+    
+    //     // 레이캐스팅 결과가 있는 경우 해당 포인트를 카메라의 타겟으로 설정합니다.
+    //     if (intersects.length > 0) {
+    //         target.copy(intersects[0].point);
+    //     }
+    
+    //     // 카메라의 시점을 부드럽게 변경시킵니다.
+    //     const dampingFactor = 0.0000001; // 회전 속도를 조절할 수 있는 값
+    //     camera.position.x += (target.x - camera.position.x) * dampingFactor;
+    //     camera.position.y += (target.y - camera.position.y) * dampingFactor;
+    //     camera.position.z += (target.z - camera.position.z) * dampingFactor;
+    
+    //     // 카메라의 시점을 변경한 후에 카메라가 바라보는 방향을 설정합니다.
+    //     camera.lookAt(target);
+    // }
     function animate() {
         // 사용자 입력에 따라 카메라의 위치 조절
-        const moveSpeed = 0.5; // 이동 속도 조절
+        const moveSpeed = 2; // 이동 속도 조절
         if (movement.forward) {
             camera.position.z += moveSpeed;
         }
@@ -496,8 +534,8 @@ window.onload = function init() {
         requestAnimationFrame(animate);
     }
 
-    animate();
 
+    animate();
 
 }
 
