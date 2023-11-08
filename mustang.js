@@ -19,12 +19,12 @@ window.onload = function init() {
 
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.1); // Light color changed to white
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.1 ); // Light color changed to white
     scene.add(ambientLight);
 
-    // const pointLight = new THREE.PointLight(0xffffff, 0.1); // Light color changed to white
-    // pointLight.position.set(0, 1000, 1000);
-    // scene.add(pointLight);
+    const pointLight = new THREE.PointLight(0xffffff, 0.1); // Light color changed to white
+    pointLight.position.set(0, 1000, 1000);
+    scene.add(pointLight);
 
     const loader = new THREE.GLTFLoader();
     loader.load('./model/scene.gltf', function (gltf) {
@@ -32,9 +32,8 @@ window.onload = function init() {
         car.scale.set(0.5, 0.5, 0.5);
 
         const material = new THREE.MeshStandardMaterial({
-            color: 0xff0000, // Change the material color
-            roughness: 0.75,
-            metalness: 1,
+            color: 0xaaaaaa, // 모델의 머터리얼 색상을 변경
+            roughness: 0.75, // 머터리얼 설정 조절 (조명 강도 조절에 도움을 줄 수 있음)
         });
 
         car.material = material;
