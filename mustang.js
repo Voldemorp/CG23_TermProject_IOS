@@ -330,7 +330,7 @@ window.onload = function init() {
         object = gltf.scene;
 
         object.scale.set(0.5, 0.5, 0.5);
-        object.position.set(12, 10, -360)
+        object.position.set(12, 30, -1410)
         scene.add(object);
     });
 
