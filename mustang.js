@@ -27,9 +27,6 @@ window.onload = function init() {
     controls.maxDistance = 1000; // 최대 줌 거리
     controls.update();
 
-<<<<<<< HEAD
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.1); // Light color changed to white
-=======
     // 투명 텍스쳐 생성
     const transparentMaterial = new THREE.MeshStandardMaterial({
         transparent: true, // 투명한 재질 설정
@@ -231,7 +228,6 @@ window.onload = function init() {
 
     // 밝기 조정
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.1 ); // Light color changed to white
->>>>>>> main
     scene.add(ambientLight);
 
     // const pointLight = new THREE.PointLight(0xffffff, 0.1); // Light color changed to white
