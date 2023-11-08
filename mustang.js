@@ -335,10 +335,68 @@ window.onload = function init() {
         console.error(error);
     });
 
+    const movement = {
+        forward: false,
+        backward: false,
+        left: false,
+        right: false
+    };
+    
+    // 키보드 이벤트 리스너 등록
+    document.addEventListener('keydown', (event) => {
+        handleKeyDown(event);
+    });
+    document.addEventListener('keyup', (event) => {
+        handleKeyUp(event);
+    });
+    
+    function handleKeyDown(event) {
+        const code = event.code;
+        if (code === 'KeyW') {
+            movement.forward = true;
+        } else if (code === 'KeyS') {
+            movement.backward = true;
+        } else if (code === 'KeyA') {
+            movement.left = true;
+        } else if (code === 'KeyD') {
+            movement.right = true;
+        }
+    }
+    
+    function handleKeyUp(event) {
+        const code = event.code;
+        if (code === 'KeyW') {
+            movement.forward = false;
+        } else if (code === 'KeyS') {
+            movement.backward = false;
+        } else if (code === 'KeyA') {
+            movement.left = false;
+        } else if (code === 'KeyD') {
+            movement.right = false;
+        }
+    }
+
     function animate() {
+        // 사용자 입력에 따라 카메라의 위치 조절
+        const moveSpeed = 0.5; // 이동 속도 조절
+        if (movement.forward) {
+            camera.position.z += moveSpeed;
+        }
+        if (movement.backward) {
+            camera.position.z -= moveSpeed;
+        }
+        if (movement.left) {
+            camera.position.x += moveSpeed;
+        }
+        if (movement.right) {
+            camera.position.x -= moveSpeed;
+        }
+    
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
+    
+    animate();
 
 
 }
