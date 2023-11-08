@@ -10,21 +10,21 @@ window.onload = function init() {
     // 씬
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff); // 배경색 변경
-    scene.fog = new THREE.Fog(0xffffff, 60, 100); // 안개 효과
+    scene.fog = new THREE.Fog(0xffffff, 570, 600); // 안개 효과
 
     // 카메라
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
-    const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 300);
+    const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 3000);
     // camera.rotation.x = 125 / 180 * Math.PI;
     // camera.rotation.y = 90 / 180 * Math.PI;
     camera.position.x = 12;
-    camera.position.y = 10;
-    camera.position.z = -370;
+    camera.position.y = 30;
+    camera.position.z = -1420;
 
     // 컨트롤
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.minDistance = 1; // 최소 줌 거리   
-    controls.maxDistance = 1000; // 최대 줌 거리
+    // controls.minDistance = 1; // 최소 줌 거리   
+    // controls.maxDistance = 1000; // 최대 줌 거리
     controls.update();
 
     // 투명 텍스쳐 생성
@@ -37,7 +37,7 @@ window.onload = function init() {
     // ----------시작 배경---------- //
 
     // 정육면체 생성
-    const primaryGeometry = new THREE.BoxGeometry(64, 46, 100);
+    const primaryGeometry = new THREE.BoxGeometry(515, 460, 355);
 
     // 텍스쳐 배열 선언
     const primaryTextureArr = [];
@@ -64,9 +64,11 @@ window.onload = function init() {
     const primaryBackground = new THREE.Mesh(primaryGeometry, primaryTextureArr);
 
     // 정육면체 위치 조정
-    primaryBackground.position.x = 4;
-    primaryBackground.position.y = 18.8;
-    primaryBackground.position.z = -290;
+
+    primaryBackground.position.x = 16.5; 
+    primaryBackground.position.y = 211.5; 
+    primaryBackground.position.z = -1150;
+
 
     // 씬에 추가
     scene.add(primaryBackground);
@@ -76,7 +78,7 @@ window.onload = function init() {
     // ----------에레브 배경 시작---------- //
 
     // 정육면체 생성
-    const ereveGeometry = new THREE.BoxGeometry(64, 46, 80); // 크기
+    const ereveGeometry = new THREE.BoxGeometry(515, 460, 355); // 크기
 
     // 텍스쳐 배열 선언
     const ereveTextureArr = [];
@@ -102,9 +104,11 @@ window.onload = function init() {
     const ereveBackground = new THREE.Mesh(ereveGeometry, ereveTextureArr);
 
     // 정육면체 위치 조정
-    ereveBackground.position.x = 4;
-    ereveBackground.position.y = 18.8;
-    ereveBackground.position.z = -200;
+
+    ereveBackground.position.x = 16.5; 
+    ereveBackground.position.y = 211.5;
+    ereveBackground.position.z = -800;
+
 
     // 씬에 추가
     scene.add(ereveBackground);
@@ -114,7 +118,7 @@ window.onload = function init() {
     // ----------커닝시티 배경 시작---------- //
 
     // 정육면체 생성
-    const kerningGeometry = new THREE.BoxGeometry(64, 46, 65);
+    const kerningGeometry = new THREE.BoxGeometry(515, 460, 295);
 
     // 텍스쳐 배열 선언
     const kerningTextureArr = [];
@@ -140,9 +144,11 @@ window.onload = function init() {
     const kerningBackground = new THREE.Mesh(kerningGeometry, kerningTextureArr);
 
     // 정육면체 위치 조정
-    kerningBackground.position.x = 4;
-    kerningBackground.position.y = 18.8;
-    kerningBackground.position.z = -127;
+
+    kerningBackground.position.x = 16.5; 
+    kerningBackground.position.y = 211.5; 
+    kerningBackground.position.z = -480;
+
 
     // 씬에 추가
     scene.add(kerningBackground);
@@ -152,7 +158,7 @@ window.onload = function init() {
     // ----------엘리니아 배경 시작---------- //
 
     // 정육면체 생성
-    const eliniaGeometry = new THREE.BoxGeometry(64, 46, 95);
+    const eliniaGeometry = new THREE.BoxGeometry(515, 460, 315);
 
     // 텍스쳐 배열 선언
     const eliniaTextureArr = [];
@@ -178,9 +184,10 @@ window.onload = function init() {
     const eliniaBackground = new THREE.Mesh(eliniaGeometry, eliniaTextureArr); // 정육면체 생성
 
     // 정육면체 위치 조정
-    eliniaBackground.position.x = 4;
-    eliniaBackground.position.y = 18.8;
-    eliniaBackground.position.z = -47;
+
+    eliniaBackground.position.x = 16.5; 
+    eliniaBackground.position.y = 211.5; 
+    eliniaBackground.position.z = -175;
 
     // 씬에 추가
     scene.add(eliniaBackground);
@@ -190,7 +197,7 @@ window.onload = function init() {
     // ----------아쿠아로드 배경 시작---------- //
 
     // 정육면체 생성
-    const aquaGeometry = new THREE.BoxGeometry(64, 46, 80);
+    const aquaGeometry = new THREE.BoxGeometry(515, 460, 330);
 
     // 텍스쳐 배열 선언
     const aquaTextureArr = [];
@@ -217,9 +224,11 @@ window.onload = function init() {
     const aquaBackground = new THREE.Mesh(aquaGeometry, aquaTextureArr);
 
     // 정육면체 위치 조정
-    aquaBackground.position.x = 4;
-    aquaBackground.position.y = 18.8;
-    aquaBackground.position.z = 40;
+
+    aquaBackground.position.x = 16.5; 
+    aquaBackground.position.y = 211.5; 
+    aquaBackground.position.z = 140;
+
 
     // 씬에 추가
     scene.add(aquaBackground);
@@ -360,7 +369,7 @@ window.onload = function init() {
     // 블렌더 맵 로드
     loader.load('./model/scene.gltf', function (gltf) {
         const car = gltf.scene.children[0];
-        car.scale.set(0.5, 0.5, 0.5);
+        car.scale.set(4.0, 4.0, 4.0);
 
         const material = new THREE.MeshStandardMaterial({
             color: 0xaaaaaa, // 모델의 머터리얼 색상을 변경
