@@ -8,6 +8,8 @@ window.onload = function init() {
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff); // Set the background color to white (0xffffff)
+    // 뒤에있는 박스는 안개에 덮인 색으로 보임
+    // scene.fog = new THREE.Fog('white', 50, 90)
 
     const camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
     camera.rotation.y = 45 / 180 * Math.PI;
@@ -25,13 +27,14 @@ window.onload = function init() {
     // scene.add(pointLight);
 
     const loader = new THREE.GLTFLoader();
-    loader.load('./model/Maple2.gltf', function (gltf) {
+    loader.load('./model/scene.gltf', function (gltf) {
         const car = gltf.scene.children[0];
         car.scale.set(0.5, 0.5, 0.5);
 
         const material = new THREE.MeshStandardMaterial({
-            color: 0xaaaaaa, // Change the material color
+            color: 0xff0000, // Change the material color
             roughness: 0.75,
+            metalness: 1,
         });
 
         car.material = material;
@@ -46,4 +49,6 @@ window.onload = function init() {
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
+    
+    
 }
