@@ -419,9 +419,39 @@ window.onload = function init() {
         }
     }
 
+    // 마우스 이벤트 리스너 등록
+    document.addEventListener('mousemove', onMouseMove);
+
+    const mouse = new THREE.Vector2();
+    const raycaster = new THREE.Raycaster();
+    const target = new THREE.Vector3();
+    
+    function onMouseMove(event) {
+        // 마우스 이벤트에서 정규화된 장치 좌표를 얻습니다.
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+        // 레이캐스터를 사용하여 마우스 포인터의 3D 공간 좌표를 얻습니다.
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObject(scene, true);
+    
+        // 레이캐스팅 결과가 있는 경우 해당 포인트를 카메라의 타겟으로 설정합니다.
+        if (intersects.length > 0) {
+            target.copy(intersects[0].point);
+        }
+    
+        // 카메라의 시점을 부드럽게 변경시킵니다.
+        const dampingFactor = 0.0000001; // 회전 속도를 조절할 수 있는 값
+        camera.position.x += (target.x - camera.position.x) * dampingFactor;
+        camera.position.y += (target.y - camera.position.y) * dampingFactor;
+        camera.position.z += (target.z - camera.position.z) * dampingFactor;
+    
+        // 카메라의 시점을 변경한 후에 카메라가 바라보는 방향을 설정합니다.
+        camera.lookAt(target);
+    }
     function animate() {
         // 사용자 입력에 따라 카메라의 위치 조절
-        const moveSpeed = 0.5; // 이동 속도 조절
+        const moveSpeed = 0.1; // 이동 속도 조절
         if (movement.forward) {
             camera.position.z += moveSpeed;
         }
@@ -438,9 +468,7 @@ window.onload = function init() {
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
-    
     animate();
-
 
 }
 
