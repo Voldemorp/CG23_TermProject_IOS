@@ -9,11 +9,12 @@ window.onload = function init() {
 
     // 씬
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
+    scene.background = new THREE.Color(0xffffff); // 배경색 변경
+    scene.fog = new THREE.Fog(0xffffff, 50, 100); // 안개 효과
 
     // 카메라
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
-    const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 300);
     // camera.rotation.x = 125 / 180 * Math.PI;
     // camera.rotation.y = 90 / 180 * Math.PI;
     camera.position.x = 12;
