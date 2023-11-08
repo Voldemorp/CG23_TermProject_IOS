@@ -10,7 +10,7 @@ window.onload = function init() {
     // 씬
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff); // 배경색 변경
-    scene.fog = new THREE.Fog(0xffffff, 50, 100); // 안개 효과
+    scene.fog = new THREE.Fog(0xffffff, 60, 100); // 안개 효과
 
     // 카메라
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
@@ -27,6 +27,13 @@ window.onload = function init() {
     controls.maxDistance = 1000; // 최대 줌 거리
     controls.update();
 
+    // 투명 텍스쳐 생성
+    const transparentMaterial = new THREE.MeshStandardMaterial({
+        transparent: true, // 투명한 재질 설정
+        opacity: 0, // 모든 면을 완전히 투명하게 만듭니다.
+        side: THREE.DoubleSide // 모든 면을 표시하도록 설정
+    });
+
     // ----------시작 배경---------- //
 
     // 정육면체 생성
@@ -36,20 +43,19 @@ window.onload = function init() {
     const primaryTextureArr = []; 
 
     // 텍스쳐 생성
-    const primaryTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
-    const primaryTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const primaryTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+    const primaryTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
     const primaryTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
     const primaryTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
-    const primaryTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const primaryTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-    
+    const primaryTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+
     // 배열에 각각의 텍스쳐 추가
-    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_ft}));
-    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_bk}));
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_lf}));
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_rt}));
     primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_up}));
     primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_dn}));
-    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_rt}));
-    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_lf}));
+    primaryTextureArr.push(transparentMaterial);
+    primaryTextureArr.push(new THREE.MeshStandardMaterial({map: primaryTexture_bk}));
 
     // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
     for (let i = 0; i < 6; i++) { primaryTextureArr[i].side = THREE.BackSide; }
@@ -76,20 +82,18 @@ window.onload = function init() {
     const ereveTextureArr = []; 
 
     // 텍스쳐 생성
-    const ereveTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
-    const ereveTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const ereveTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+    const ereveTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
     const ereveTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
     const ereveTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
-    const ereveTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const ereveTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-    
+
     // 배열에 각각의 텍스쳐 추가
-    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_ft}));
-    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_bk}));
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_lf}));
+    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_rt}));
     ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_up}));
     ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_dn}));
-    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_rt}));
-    ereveTextureArr.push(new THREE.MeshStandardMaterial({map: ereveTexture_lf}));
+    ereveTextureArr.push(transparentMaterial);
+    ereveTextureArr.push(transparentMaterial);
 
     // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
     for (let i = 0; i < 6; i++) { ereveTextureArr[i].side = THREE.BackSide; }
@@ -116,20 +120,18 @@ window.onload = function init() {
    const kerningTextureArr = []; 
 
    // 텍스쳐 생성
-   const kerningTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
-   const kerningTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+   const kerningTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+   const kerningTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
    const kerningTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
    const kerningTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
-   const kerningTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-   const kerningTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-   
+
    // 배열에 각각의 텍스쳐 추가
-   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_ft}));
-   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_bk}));
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_lf}));
+   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_rt}));
    kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_up}));
    kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_dn}));
-   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_rt}));
-   kerningTextureArr.push(new THREE.MeshStandardMaterial({map: kerningTexture_lf}));
+   kerningTextureArr.push(transparentMaterial);
+   kerningTextureArr.push(transparentMaterial);
 
    // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
    for (let i = 0; i < 6; i++) { kerningTextureArr[i].side = THREE.BackSide; }
@@ -156,20 +158,18 @@ window.onload = function init() {
     const eliniaTextureArr = []; 
 
     // 텍스쳐 생성
-    const eliniaTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
-    const eliniaTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const eliniaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+    const eliniaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
     const eliniaTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
     const eliniaTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
-    const eliniaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const eliniaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-   
+
     // 배열에 각각의 텍스쳐 추가
-    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_ft}));
-    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_bk}));
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_lf}));
+    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_rt}));
     eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_up}));
     eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_dn}));
-    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_rt}));
-    eliniaTextureArr.push(new THREE.MeshStandardMaterial({map: eliniaTexture_lf}));
+    eliniaTextureArr.push(transparentMaterial);
+    eliniaTextureArr.push(transparentMaterial);
 
     // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
     for (let i = 0; i < 6; i++) { eliniaTextureArr[i].side = THREE.BackSide; }
@@ -196,20 +196,19 @@ window.onload = function init() {
     const aquaTextureArr = []; 
 
     // 텍스쳐 생성
-    const aquaTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
-    const aquaTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
+    const aquaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
+    const aquaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
     const aquaTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
     const aquaTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
-    const aquaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const aquaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-   
+    const aquaTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
+
     // 배열에 각각의 텍스쳐 추가
-    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_ft}));
-    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_bk}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_lf}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_rt}));
     aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_up}));
     aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_dn}));
-    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_rt}));
-    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_lf}));
+    aquaTextureArr.push(new THREE.MeshStandardMaterial({map: aquaTexture_ft}));
+    aquaTextureArr.push(transparentMaterial);
 
     // 각각의 텍스쳐가 정육면체 안쪽으로 들어가도록 설정
     for (let i = 0; i < 6; i++) { aquaTextureArr[i].side = THREE.BackSide; }
