@@ -257,4 +257,6 @@ window.onload = function init() {
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
+    
+    
 }
