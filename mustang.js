@@ -15,11 +15,9 @@ window.onload = function init() {
     // 카메라
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
     const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 3000);
-    // camera.rotation.x = 125 / 180 * Math.PI;
-    // camera.rotation.y = 90 / 180 * Math.PI;
     camera.position.x = 12;
     camera.position.y = 30;
-    camera.position.z = -1420;
+    camera.position.z = -1425;
 
     // 컨트롤
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -30,7 +28,7 @@ window.onload = function init() {
     // 투명 텍스쳐 생성
     const transparentMaterial = new THREE.MeshStandardMaterial({
         transparent: true, // 투명한 재질 설정
-        opacity: 0, // 모든 면을 완전히 투명하게 만듭니다.
+        opacity: 0, // 모든 면을 완전히 투명하게 표시
         side: THREE.DoubleSide // 모든 면을 표시하도록 설정
     });
 
