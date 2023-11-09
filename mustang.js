@@ -15,13 +15,9 @@ window.onload = function init() {
     // 카메라
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
     const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 3000);
-    // camera.rotation.x = 125 / 180 * Math.PI;
-    // camera.rotation.y =ZA 90 / 180 * Math.PI;
     camera.position.x = 12;
     camera.position.y = 30;
     camera.position.z = -1420;
-
-
     camera.rotation.y = Math.PI; // 180도 회전
 
     const controls = new PointerLockControls(camera, document.body);
@@ -534,6 +530,27 @@ window.onload = function init() {
                 sound.play();
             });
         }
+
+        // ----------벽 충돌 감지 파트 시작---------- //
+
+        // 오른쪽 벽과의 충돌 확인
+        if (cameraPositionInWorld.x < -213) {
+            movement.right = false;
+        }
+        // 왼쪽 벽과의 충돌 확인
+        else if (cameraPositionInWorld.x > 242) {
+            movement.left = false;
+        }
+        // 시작 맵 뒷쪽 벽과의 충돌 확인
+        else if (cameraPositionInWorld.z < -1419.99) {
+            movement.backward = false;
+        }
+        // 아쿠아로드 앞쪽 벽과의 충돌 확인
+        else if (cameraPositionInWorld.z > 304.99) {
+            movement.forward = false;
+        }
+
+        // ----------벽 충돌 감지 파트 끝---------- //
     }
 
     function handleKeyUp(event) {
