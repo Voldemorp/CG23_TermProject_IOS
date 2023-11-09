@@ -455,14 +455,6 @@ window.onload = function init() {
         }
     }
 
-    /*const obstacleGeometry = new THREE.BoxGeometry(5, 5, 5); // 장애물의 크기 조절
-    //const obstacleTexture = new THREE.TextureLoader().load('./path/to/obstacle_texture.jpg'); // 장애물의 텍스처 로딩
-    const obstacleMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // 장애물의 재질 정의
-
-    const obstacleMesh = new THREE.Mesh(obstacleGeometry, obstacleMaterial); // 장애물의 메쉬 생성
-    obstacleMesh.position.set(12, 10, -360); // 장애물의 위치 설정 (x, y, z)
-    scene.add(obstacleMesh); // 씬에 장애물 추가*/
-
     const movement = {
         forward: false,
         backward: false,
@@ -534,23 +526,28 @@ window.onload = function init() {
         // ----------벽 충돌 감지 파트 시작---------- //
 
         // 오른쪽 벽과의 충돌 확인
-        if (cameraPositionInWorld.x < -213) {
-            movement.right = false;
-        }
+        if (cameraPositionInWorld.x < -213) { movement.right = false; }
         // 왼쪽 벽과의 충돌 확인
-        else if (cameraPositionInWorld.x > 242) {
-            movement.left = false;
-        }
+        else if (cameraPositionInWorld.x > 242) { movement.left = false; }
         // 시작 맵 뒷쪽 벽과의 충돌 확인
-        else if (cameraPositionInWorld.z < -1419.99) {
-            movement.backward = false;
-        }
+        else if (cameraPositionInWorld.z < -1419.99) { movement.backward = false; }
         // 아쿠아로드 앞쪽 벽과의 충돌 확인
-        else if (cameraPositionInWorld.z > 304.99) {
-            movement.forward = false;
-        }
+        else if (cameraPositionInWorld.z > 304.99) { movement.forward = false; }
 
         // ----------벽 충돌 감지 파트 끝---------- //
+
+        // ----------장애물 충돌 감지 파트 시작---------- //
+
+        // 시작화면 장애물 처리 파트
+        if (cameraPositionInWorld.x > 60 && cameraPositionInWorld.z > -1372 && cameraPositionInWorld.x < 248 && cameraPositionInWorld.z < -1320) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -206 && cameraPositionInWorld.x < -68 && cameraPositionInWorld.z > -1293 && cameraPositionInWorld.z < -1234) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -125 && cameraPositionInWorld.x < -14 && cameraPositionInWorld.z > -1221 && cameraPositionInWorld.z < -1152) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 60 && cameraPositionInWorld.x < 221 && cameraPositionInWorld.z > -1250 && cameraPositionInWorld.z < -1158) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 95 && cameraPositionInWorld.x < 242 && cameraPositionInWorld.z > -1116 && cameraPositionInWorld.z < -983) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -210 && cameraPositionInWorld.x < -100 && cameraPositionInWorld.z > -1123 && cameraPositionInWorld.z < -983) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -101 && cameraPositionInWorld.x < 0 && cameraPositionInWorld.z > -1089 && cameraPositionInWorld.z < -983) { movement.forward = false; }
+
+        // 에레브 장애물 처리 파트
     }
 
     function handleKeyUp(event) {
