@@ -555,6 +555,31 @@ window.onload = function init() {
         if (cameraPositionInWorld.x > -59 && cameraPositionInWorld.x < -20 && cameraPositionInWorld.z > -747 && cameraPositionInWorld.z < -669) { movement.forward = false; }
         if (cameraPositionInWorld.x > 35 && cameraPositionInWorld.x < 158 && cameraPositionInWorld.z > -801 && cameraPositionInWorld.z < -777) { movement.forward = false; }
         if (cameraPositionInWorld.x > 50 && cameraPositionInWorld.x < 245 && cameraPositionInWorld.z > -747 && cameraPositionInWorld.z < -684) { movement.forward = false; }
+
+        // 커닝시티 장애물 처리 파트
+        if (cameraPositionInWorld.x > -104 && cameraPositionInWorld.x < 6 && cameraPositionInWorld.z > -579 && cameraPositionInWorld.z < -474) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -224 && cameraPositionInWorld.x < -119 && cameraPositionInWorld.z > -564 && cameraPositionInWorld.z < -474) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 32 && cameraPositionInWorld.x < 179 && cameraPositionInWorld.z > -606 && cameraPositionInWorld.z < -525) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 119 && cameraPositionInWorld.x < 182 && cameraPositionInWorld.z > -660 && cameraPositionInWorld.z < -582) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 68 && cameraPositionInWorld.x < 242 && cameraPositionInWorld.z > -471 && cameraPositionInWorld.z < -444) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -41 && cameraPositionInWorld.x < -20 && cameraPositionInWorld.z > -423 && cameraPositionInWorld.z < -408) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -215 && cameraPositionInWorld.x < -167 && cameraPositionInWorld.z > -423 && cameraPositionInWorld.z < -360) { movement.forward = false; }
+
+        // 엘리니아 장애물 처리 파트
+        if (cameraPositionInWorld.x > -110 && cameraPositionInWorld.x < -47 && cameraPositionInWorld.z > -331 && cameraPositionInWorld.z < -330) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -8 && cameraPositionInWorld.x < 122 && cameraPositionInWorld.z > -258 && cameraPositionInWorld.z < -180) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 128 && cameraPositionInWorld.x < -50 && cameraPositionInWorld.z > -324 && cameraPositionInWorld.z < -259) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 164 && cameraPositionInWorld.x < 266 && cameraPositionInWorld.z > -159 && cameraPositionInWorld.z < -114) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -224 && cameraPositionInWorld.x < -44 && cameraPositionInWorld.z > -240 && cameraPositionInWorld.z < -24) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 29 && cameraPositionInWorld.x < 104 && cameraPositionInWorld.z > -108 && cameraPositionInWorld.z < -45) { movement.forward = false; }
+
+        // 아쿠아로드 장애물 처리 파트
+        if (cameraPositionInWorld.x > -217 && cameraPositionInWorld.x < -175 && cameraPositionInWorld.z > -9 && cameraPositionInWorld.z < 16) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -150 && cameraPositionInWorld.x < 129 && cameraPositionInWorld.z > 100 && cameraPositionInWorld.z < 157) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 48 && cameraPositionInWorld.x < 141 && cameraPositionInWorld.z > 34 && cameraPositionInWorld.z < 49) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 204 && cameraPositionInWorld.x < 264 && cameraPositionInWorld.z > 64 && cameraPositionInWorld.z < 88) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 201 && cameraPositionInWorld.x < 243 && cameraPositionInWorld.z > 163 && cameraPositionInWorld.z < 200) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -213 && cameraPositionInWorld.x < 255 && cameraPositionInWorld.z > 215 && cameraPositionInWorld.z < 319) { movement.forward = false; }
     }
 
     function handleKeyUp(event) {
