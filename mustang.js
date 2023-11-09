@@ -22,16 +22,16 @@ window.onload = function init() {
     camera.position.z = -1420;
 
 
-camera.rotation.y = Math.PI; // 180도 회전
+    camera.rotation.y = Math.PI; // 180도 회전
 
 const controls = new PointerLockControls( camera, document.body );
 
 // Pointer Lock를 사용한 마우스 클릭 이벤트 처리
-document.body.addEventListener("click", () => {
-    if (!controls.isLocked) {
-        controls.lock();
-    }
-});
+    document.body.addEventListener("click", () => {
+        if (!controls.isLocked) {
+            controls.lock();
+        }
+    });
 
 
 
@@ -253,60 +253,6 @@ document.body.addEventListener("click", () => {
     // pointLight.position.set(0, 1000, 1000);
     // scene.add(pointLight);
 
-    //아쿠아로드 노래 재생
-    // const backgroundAudio = document.getElementById("AquaRoad_audio");
-
-    // // 오디오 자동 재생 (선택 사항)
-    // backgroundAudio.autoplay = true;
-
-    // // 노래가 무한 반복되도록 설정 (선택 사항)
-    // backgroundAudio.loop = true;
-
-    // // 오디오 재생
-    // backgroundAudio.play();
-
-    // 오디오 일시 정지
-    // backgroundAudio.pause();
-
-    // Create an AudioContext after a user gesture (e.g., click)
-    // document.addEventListener('click', function() {
-    //     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-    //     // 이제 오디오 로딩 및 재생을 수행할 수 있음
-    //     const audioLoader = new THREE.AudioLoader();
-    //     audioLoader.load('./model/audio/AquaRoad.mp3', function(buffer) {
-    //       const listener = new THREE.AudioListener();
-    //       const sound = new THREE.Audio(listener);
-    //       sound.setBuffer(buffer);
-    //       sound.setLoop(true);
-    //       sound.setVolume(0.5);
-    //       sound.play();
-    //     });
-    //   });
-    // 카메라의 현재 위치를 가져옵니다.
-    // 카메라 위치를 기준으로 어떤 노래를 재생할지 결정합니다.
-    // let audioFilePath;
-    // if (camera.position.x < 50 && camera.position.y < 50 && camera.position.z < 50) {
-    //     audioFilePath = './model/audio/AquaRoad.mp3'; // 첫 번째 노래 파일 경로
-    // } else {
-    //     audioFilePath = './model/audio/Elinia.mp3'; // 두 번째 노래 파일 경로
-    // }
-
-    // // 사용자 동작 이후에 오디오 컨텍스트 생성
-    // document.addEventListener('click', function() {
-    //     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-    //     // 오디오 로딩 및 재생
-    //     const audioLoader = new THREE.AudioLoader();
-    //     audioLoader.load(audioFilePath, function(buffer) {
-    //         const listener = new THREE.AudioListener();
-    //         const sound = new THREE.Audio(listener);
-    //         sound.setBuffer(buffer);
-    //         sound.setLoop(true);
-    //         sound.setVolume(0.5);
-    //         sound.play();
-    //     });
-    // });
 
     window.addEventListener('mousedown', onDocumentMouseDown, false);
     function onDocumentMouseDown(event) {
@@ -391,6 +337,7 @@ document.body.addEventListener("click", () => {
             image.style.top = event.clientY + 'px';
             image.style.left = event.clientX + 'px';
             image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+
             document.body.appendChild(image);
 
             //5초 후에 이미지 사라지게 함
@@ -439,6 +386,26 @@ document.body.addEventListener("click", () => {
         }
     }
 
+
+
+    // 블렌더 맵 로드
+    loader.load('./model/scene.gltf', function (gltf) {
+        const car = gltf.scene.children[0];
+        car.scale.set(4.0, 4.0, 4.0);
+
+        const material = new THREE.MeshStandardMaterial({
+            color: 0xaaaaaa, // 모델의 머터리얼 색상을 변경
+            roughness: 0.75, // 머터리얼 설정 조절 (조명 강도 조절에 도움을 줄 수 있음)
+        });
+
+        car.material = material;
+
+        scene.add(gltf.scene);
+        animate();
+    }, undefined, function (error) {
+        console.error(error);
+    });
+
     /*const obstacleGeometry = new THREE.BoxGeometry(5, 5, 5); // 장애물의 크기 조절
     //const obstacleTexture = new THREE.TextureLoader().load('./path/to/obstacle_texture.jpg'); // 장애물의 텍스처 로딩
     const obstacleMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // 장애물의 재질 정의
@@ -485,14 +452,14 @@ document.body.addEventListener("click", () => {
 
         let newAudioFilePath = '';
 
-        // X좌표가 10보다 작을 경우 노래 재생
-        if (cameraPositionInWorld.y < 10.0033 && cameraPositionInWorld.z < -266.13) {
+        // z 좌표에 따라 다른 배경음악 재생
+        if (cameraPositionInWorld.z < -1019) {
             newAudioFilePath = './model/audio/Title.mp3';
-        } else if (cameraPositionInWorld.y < 10.0055 && cameraPositionInWorld.z < -168) {
+        } else if(cameraPositionInWorld.z < -700) {
             newAudioFilePath = './model/audio/Ereve.mp3';
-        } else if (cameraPositionInWorld.y < 10.0082 && cameraPositionInWorld.z < -111) {
+        } else if (cameraPositionInWorld.z < -349) {
             newAudioFilePath = './model/audio/KerningCity.mp3';
-        } else if (cameraPositionInWorld.y < 10.0420 && cameraPositionInWorld.z < -19.99) {
+        } else if (cameraPositionInWorld.z < -50) {
             newAudioFilePath = './model/audio/Elinia.mp3';
         } else
             newAudioFilePath = './model/audio/AquaRoad.mp3';
@@ -531,38 +498,6 @@ document.body.addEventListener("click", () => {
         }
     }
 
-    // // 마우스 이벤트 리스너 등록
-    // document.addEventListener('mousemove', onMouseMove);
-
-    // const mouse = new THREE.Vector2();
-    // const raycaster = new THREE.Raycaster();
-    // const target = new THREE.Vector3();
-
-    // function onMouseMove(event) {
-    //     // 마우스 이벤트에서 정규화된 장치 좌표를 얻습니다.
-    //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    //     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    
-    //     // 레이캐스터를 사용하여 마우스 포인터의 3D 공간 좌표를 얻습니다.
-    //     raycaster.setFromCamera(mouse, camera);
-    //     const intersects = raycaster.intersectObject(scene, true);
-    
-
-    //     // 레이캐스팅 결과가 있는 경우 해당 포인트를 카메라의 타겟으로 설정합니다.
-    //     if (intersects.length > 0) {
-    //         target.copy(intersects[0].point);
-    //     }
-
-    //     // 카메라의 시점을 부드럽게 변경시킵니다.
-    //     const dampingFactor = 0.0000001; // 회전 속도를 조절할 수 있는 값
-    //     camera.position.x += (target.x - camera.position.x) * dampingFactor;
-    //     camera.position.y += (target.y - camera.position.y) * dampingFactor;
-    //     camera.position.z += (target.z - camera.position.z) * dampingFactor;
-
-    //     // 카메라의 시점을 변경한 후에 카메라가 바라보는 방향을 설정합니다.
-    //     camera.lookAt(target);
-    // }
     function animate() {
         // 사용자 입력에 따라 카메라의 위치 조절
 
