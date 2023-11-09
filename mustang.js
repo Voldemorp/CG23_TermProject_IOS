@@ -16,16 +16,24 @@ window.onload = function init() {
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
     const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 3000);
     // camera.rotation.x = 125 / 180 * Math.PI;
-    // camera.rotation.y = 90 / 180 * Math.PI;
+    // camera.rotation.y =ZA 90 / 180 * Math.PI;
     camera.position.x = 12;
     camera.position.y = 30;
     camera.position.z = -1420;
 
-    // 컨트롤
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    // controls.minDistance = 1; // 최소 줌 거리   
-    // controls.maxDistance = 1000; // 최대 줌 거리
-    controls.update();
+    camera.rotation.y = Math.PI; // 180도 회전
+
+    const controls = new PointerLockControls(camera, document.body);
+
+    // Pointer Lock를 사용한 마우스 클릭 이벤트 처리
+    document.body.addEventListener("click", () => {
+        if (!controls.isLocked) {
+            controls.lock();
+        }
+    });
+
+
+
 
     // 투명 텍스쳐 생성
     const transparentMaterial = new THREE.MeshStandardMaterial({
@@ -65,8 +73,8 @@ window.onload = function init() {
 
     // 정육면체 위치 조정
 
-    primaryBackground.position.x = 16.5; 
-    primaryBackground.position.y = 211.5; 
+    primaryBackground.position.x = 16.5;
+    primaryBackground.position.y = 211.5;
     primaryBackground.position.z = -1150;
 
 
@@ -105,7 +113,7 @@ window.onload = function init() {
 
     // 정육면체 위치 조정
 
-    ereveBackground.position.x = 16.5; 
+    ereveBackground.position.x = 16.5;
     ereveBackground.position.y = 211.5;
     ereveBackground.position.z = -800;
 
@@ -145,8 +153,8 @@ window.onload = function init() {
 
     // 정육면체 위치 조정
 
-    kerningBackground.position.x = 16.5; 
-    kerningBackground.position.y = 211.5; 
+    kerningBackground.position.x = 16.5;
+    kerningBackground.position.y = 211.5;
     kerningBackground.position.z = -480;
 
 
@@ -185,8 +193,8 @@ window.onload = function init() {
 
     // 정육면체 위치 조정
 
-    eliniaBackground.position.x = 16.5; 
-    eliniaBackground.position.y = 211.5; 
+    eliniaBackground.position.x = 16.5;
+    eliniaBackground.position.y = 211.5;
     eliniaBackground.position.z = -175;
 
     // 씬에 추가
@@ -225,8 +233,8 @@ window.onload = function init() {
 
     // 정육면체 위치 조정
 
-    aquaBackground.position.x = 16.5; 
-    aquaBackground.position.y = 211.5; 
+    aquaBackground.position.x = 16.5;
+    aquaBackground.position.y = 211.5;
     aquaBackground.position.z = 140;
 
 
@@ -320,7 +328,9 @@ window.onload = function init() {
     const cameraY = cameraPosition.y;
     const cameraZ = cameraPosition.z;
 
-    console.log(`카메라 위치: X: ${cameraX}, Y: ${cameraY}, Z: ${cameraZ}`);
+
+
+    console.log(`카메라 위치: X: ${cameraX}, Y: ${cameraY}, Z: ${cameraZ}, found: ${found}`);
 
 
 
@@ -329,8 +339,9 @@ window.onload = function init() {
     loader.load('maple.gltf', function (gltf) {
         object = gltf.scene;
 
-        object.scale.set(0.5, 0.5, 0.5);
-        object.position.set(12, 30, -1410)
+        object.scale.set(5, 5, 5);
+        object.position.set(130, -15, -1058)
+        object.rotation.x = Math.PI / 2
         scene.add(object);
     });
 
@@ -338,6 +349,26 @@ window.onload = function init() {
     const mouse = new THREE.Vector2();
     const raycaster = new THREE.Raycaster();
 
+
+    // 블렌더 맵 로드
+    loader.load('./model/scene.gltf', function (gltf) {
+        const car = gltf.scene.children[0];
+        car.scale.set(4.0, 4.0, 4.0);
+
+        const material = new THREE.MeshStandardMaterial({
+            color: 0xaaaaaa, // 모델의 머터리얼 색상을 변경
+            roughness: 0.75, // 머터리얼 설정 조절 (조명 강도 조절에 도움을 줄 수 있음)
+        });
+
+        car.material = material;
+
+        scene.add(gltf.scene);
+        animate();
+    }, undefined, function (error) {
+        console.error(error);
+    });
+
+    var found = 1;
     //단풍잎 클릭했을 때 수행
     document.addEventListener('mousedown', onDocumentMouseDown);
     function onDocumentMouseDown(event) {
@@ -358,31 +389,53 @@ window.onload = function init() {
             image.style.top = event.clientY + 'px';
             image.style.left = event.clientX + 'px';
             image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
-
             document.body.appendChild(image);
+
+            //5초 후에 이미지 사라지게 함
+            setTimeout(function () {
+                document.body.removeChild(image);
+            }, 5000);
+
+            // 단풍 찾았을 때 단풍 삭제
+            scene.remove(object);
+            found++;
+
+            if (found == 3) {
+                // 에레브 단풍잎 생성
+                object.scale.set(5, 5, 5);
+                object.position.set(-66, -15, -862)
+                object.rotation.x = Math.PI / 2
+                scene.add(object);
+
+            }
+            else if (found == 5) {
+                //커닝시티 단풍잎 생성
+                object.scale.set(5, 5, 5);
+                object.position.set(-203, 70, -517)//60
+                object.rotation.x = 0
+                scene.add(object);
+
+            }
+            else if (found == 7) {
+                //엘리니아 단풍잎 생성
+                object.scale.set(5, 5, 5);
+                object.position.set(-81, -15, -46)
+                object.rotation.x = Math.PI / 2
+                scene.add(object);
+
+            }
+            else if (found == 9) {
+                //아쿠아로드 단풍잎 생성
+                object.scale.set(10, 10, 10);
+                object.position.set(-63, -13, 125)
+                object.rotation.x = Math.PI / 2
+                scene.add(object);
+
+            }
+            else { }
 
         }
     }
-
-
-
-    // 블렌더 맵 로드
-    loader.load('./model/scene.gltf', function (gltf) {
-        const car = gltf.scene.children[0];
-        car.scale.set(4.0, 4.0, 4.0);
-
-        const material = new THREE.MeshStandardMaterial({
-            color: 0xaaaaaa, // 모델의 머터리얼 색상을 변경
-            roughness: 0.75, // 머터리얼 설정 조절 (조명 강도 조절에 도움을 줄 수 있음)
-        });
-
-        car.material = material;
-
-        scene.add(gltf.scene);
-        animate();
-    }, undefined, function (error) {
-        console.error(error);
-    });
 
     /*const obstacleGeometry = new THREE.BoxGeometry(5, 5, 5); // 장애물의 크기 조절
     //const obstacleTexture = new THREE.TextureLoader().load('./path/to/obstacle_texture.jpg'); // 장애물의 텍스처 로딩
@@ -426,7 +479,7 @@ window.onload = function init() {
 
         // 카메라 좌표를 로그에 출력
         const cameraPositionInWorld = camera.position.clone().unproject(camera);
-        console.log(`카메라 위치: X: ${cameraPositionInWorld.x}, Y: ${cameraPositionInWorld.y}, Z: ${cameraPositionInWorld.z}`);
+        console.log(`카메라 위치: X: ${cameraPositionInWorld.x}, Y: ${cameraPositionInWorld.y}, Z: ${cameraPositionInWorld.z}, found: ${found}`);
 
         let newAudioFilePath = '';
 
@@ -476,9 +529,39 @@ window.onload = function init() {
         }
     }
 
+    // // 마우스 이벤트 리스너 등록
+    // document.addEventListener('mousemove', onMouseMove);
+
+    // const mouse = new THREE.Vector2();
+    // const raycaster = new THREE.Raycaster();
+    // const target = new THREE.Vector3();
+
+    // function onMouseMove(event) {
+    //     // 마우스 이벤트에서 정규화된 장치 좌표를 얻습니다.
+    //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    //     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    //     // 레이캐스터를 사용하여 마우스 포인터의 3D 공간 좌표를 얻습니다.
+    //     raycaster.setFromCamera(mouse, camera);
+    //     const intersects = raycaster.intersectObject(scene, true);
+
+    //     // 레이캐스팅 결과가 있는 경우 해당 포인트를 카메라의 타겟으로 설정합니다.
+    //     if (intersects.length > 0) {
+    //         target.copy(intersects[0].point);
+    //     }
+
+    //     // 카메라의 시점을 부드럽게 변경시킵니다.
+    //     const dampingFactor = 0.0000001; // 회전 속도를 조절할 수 있는 값
+    //     camera.position.x += (target.x - camera.position.x) * dampingFactor;
+    //     camera.position.y += (target.y - camera.position.y) * dampingFactor;
+    //     camera.position.z += (target.z - camera.position.z) * dampingFactor;
+
+    //     // 카메라의 시점을 변경한 후에 카메라가 바라보는 방향을 설정합니다.
+    //     camera.lookAt(target);
+    // }
     function animate() {
         // 사용자 입력에 따라 카메라의 위치 조절
-        const moveSpeed = 0.5; // 이동 속도 조절
+        const moveSpeed = 1.5; // 이동 속도 조절
         if (movement.forward) {
             camera.position.z += moveSpeed;
         }
@@ -496,8 +579,7 @@ window.onload = function init() {
         requestAnimationFrame(animate);
     }
 
+
     animate();
 
-
 }
-
