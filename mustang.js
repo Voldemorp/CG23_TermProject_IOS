@@ -24,18 +24,14 @@ window.onload = function init() {
 
     camera.rotation.y = Math.PI; // 180도 회전
 
-const controls = new PointerLockControls( camera, document.body );
+    const controls = new PointerLockControls(camera, document.body);
 
-// Pointer Lock를 사용한 마우스 클릭 이벤트 처리
+    // Pointer Lock를 사용한 마우스 클릭 이벤트 처리
     document.body.addEventListener("click", () => {
         if (!controls.isLocked) {
             controls.lock();
         }
     });
-
-
-
-
 
     // 투명 텍스쳐 생성
     const transparentMaterial = new THREE.MeshStandardMaterial({
@@ -297,6 +293,23 @@ const controls = new PointerLockControls( camera, document.body );
     const mouse = new THREE.Vector2();
     const raycaster = new THREE.Raycaster();
 
+    //벽 로드
+    loader.load('./model/wall.gltf', function (gltf) {
+        wall = gltf.scene;
+
+        wall.scale.set(1, 600, 280); //두깨, 높이, 너비
+        wall.position.set(20, -15, -960)
+        wall.rotation.y = Math.PI / 2;
+        // 벽의 재질 투명하게
+        const material = new THREE.MeshBasicMaterial({
+            transparent: true,
+            opacity: 0.5 //0에 가까울수록 더 투명
+        });
+
+        wall.children[0].material = material;
+        scene.add(wall);
+
+    });
 
     // 블렌더 맵 로드
     loader.load('./model/scene.gltf', function (gltf) {
@@ -316,7 +329,10 @@ const controls = new PointerLockControls( camera, document.body );
         console.error(error);
     });
 
+
     var found = 1;
+    var wallEnabled = true; // 벽의 충돌 감지 상태를 나타내는 변수
+
     //단풍잎 클릭했을 때 수행
     document.addEventListener('mousedown', onDocumentMouseDown);
     function onDocumentMouseDown(event) {
@@ -346,23 +362,55 @@ const controls = new PointerLockControls( camera, document.body );
             }, 5000);
 
             // 단풍 찾았을 때 단풍 삭제
-            scene.remove(object);
+            scene.remove(object);         
+
+            wallEnabled = false;
+
+            // 단풍 찾았을 때 벽 삭제
+            scene.remove(wall);
             found++;
 
             if (found == 3) {
+                
                 // 에레브 단풍잎 생성
                 object.scale.set(5, 5, 5);
                 object.position.set(-66, -15, -862)
                 object.rotation.x = Math.PI / 2
                 scene.add(object);
 
+                // 에레브 벽 생성
+                wall.scale.set(1, 600, 280); //두깨, 높이, 너비
+        wall.position.set(20, -15, -650)
+                wall.rotation.y = Math.PI / 2;
+                // 벽의 재질 투명하게
+                const material = new THREE.MeshBasicMaterial({
+                    transparent: true,
+                    opacity: 0.5 //0에 가까울수록 더 투명
+                });
+
+                wall.children[0].material = material;
+                scene.add(wall);
+
             }
             else if (found == 5) {
                 //커닝시티 단풍잎 생성
                 object.scale.set(5, 5, 5);
-                object.position.set(-203, 70, -517)//60
+                object.position.set(-203, 70, -517)
                 object.rotation.x = 0
                 scene.add(object);
+
+                //커닝시티 벽 생성
+                wall.scale.set(1, 600, 280); //두깨, 높이, 너비
+        wall.position.set(20, -15, -328)
+                wall.rotation.y = Math.PI / 2;
+                // 벽의 재질 투명하게
+                const material = new THREE.MeshBasicMaterial({
+                    transparent: true,
+                    opacity: 0.5 //0에 가까울수록 더 투명
+                });
+
+                wall.children[0].material = material;
+                scene.add(wall);
 
             }
             else if (found == 7) {
@@ -372,6 +420,19 @@ const controls = new PointerLockControls( camera, document.body );
                 object.rotation.x = Math.PI / 2
                 scene.add(object);
 
+                //엘리니아 벽 생성
+                wall.scale.set(1, 600, 280); //두깨, 높이, 너비
+        wall.position.set(20, -15, -7)
+                wall.rotation.y = Math.PI / 2;
+                // 벽의 재질 투명하게
+                const material = new THREE.MeshBasicMaterial({
+                    transparent: true,
+                    opacity: 0.5 //0에 가까울수록 더 투명
+                });
+
+                wall.children[0].material = material;
+                scene.add(wall);
+
             }
             else if (found == 9) {
                 //아쿠아로드 단풍잎 생성
@@ -380,31 +441,23 @@ const controls = new PointerLockControls( camera, document.body );
                 object.rotation.x = Math.PI / 2
                 scene.add(object);
 
+                //아쿠아로드 벽 생성
+                wall.scale.set(1, 600, 280); //두깨, 높이, 너비
+        wall.position.set(20, -15, 312)
+                wall.rotation.y = Math.PI / 2;
+                // 벽의 재질 투명하게
+                const material = new THREE.MeshBasicMaterial({
+                    transparent: true,
+                    opacity: 0.5 //0에 가까울수록 더 투명
+                });
+
+                wall.children[0].material = material;
+                scene.add(wall);
             }
             else { }
 
         }
     }
-
-
-
-    // 블렌더 맵 로드
-    loader.load('./model/scene.gltf', function (gltf) {
-        const car = gltf.scene.children[0];
-        car.scale.set(4.0, 4.0, 4.0);
-
-        const material = new THREE.MeshStandardMaterial({
-            color: 0xaaaaaa, // 모델의 머터리얼 색상을 변경
-            roughness: 0.75, // 머터리얼 설정 조절 (조명 강도 조절에 도움을 줄 수 있음)
-        });
-
-        car.material = material;
-
-        scene.add(gltf.scene);
-        animate();
-    }, undefined, function (error) {
-        console.error(error);
-    });
 
     /*const obstacleGeometry = new THREE.BoxGeometry(5, 5, 5); // 장애물의 크기 조절
     //const obstacleTexture = new THREE.TextureLoader().load('./path/to/obstacle_texture.jpg'); // 장애물의 텍스처 로딩
@@ -448,14 +501,13 @@ const controls = new PointerLockControls( camera, document.body );
 
         // 카메라 좌표를 로그에 출력
         const cameraPositionInWorld = camera.position.clone().unproject(camera);
-        console.log(`카메라 위치: X: ${cameraPositionInWorld.x}, Y: ${cameraPositionInWorld.y}, Z: ${cameraPositionInWorld.z}, found: ${found}`);
+        console.log(`카메라 위치: X: ${cameraPositionInWorld.x}, Y: ${cameraPositionInWorld.y}, Z: ${cameraPositionInWorld.z}, found: ${found}, wallEnabled: ${wallEnabled}`);
 
-        let newAudioFilePath = '';
 
         // z 좌표에 따라 다른 배경음악 재생
         if (cameraPositionInWorld.z < -1019) {
             newAudioFilePath = './model/audio/Title.mp3';
-        } else if(cameraPositionInWorld.z < -700) {
+        } else if (cameraPositionInWorld.z < -700) {
             newAudioFilePath = './model/audio/Ereve.mp3';
         } else if (cameraPositionInWorld.z < -349) {
             newAudioFilePath = './model/audio/KerningCity.mp3';
@@ -498,13 +550,38 @@ const controls = new PointerLockControls( camera, document.body );
         }
     }
 
+    // 벽과 카메라의 충돌을 검사하기 위한 레이캐스터 생성
+    const wallRaycaster = new THREE.Raycaster();
+
+
+    // 벽과 카메라의 충돌을 검사하는 함수
+    function checkWallCollision() {
+        const wallIntersects = [];
+        if (!wallEnabled) {
+            wallEnabled=true;
+            return false; // 충돌 감지 비활성화 시 항상 false 반환
+        }
+        wallRaycaster.set(camera.position, new THREE.Vector3(0, 0, -1)); // 카메라 위치에서 앞쪽으로 레이 발사
+        wallRaycaster.intersectObject(wall, true, wallIntersects); // 벽과의 충돌 감지
+
+        return wallIntersects.length > 0;
+    }
+
+
+
+
     function animate() {
         // 사용자 입력에 따라 카메라의 위치 조절
-
-        const moveSpeed = 1.5; // 이동 속도 조절
+        const moveSpeed = 1.5;
 
         if (movement.forward) {
-            camera.position.z += moveSpeed;
+            // 벽과의 충돌을 확인
+            const isColliding = checkWallCollision();
+
+            // 벽과의 충돌이 없는 경우에만 카메라의 위치를 변경
+            if (!isColliding) {
+                camera.position.z += moveSpeed;
+            }
         }
         if (movement.backward) {
             camera.position.z -= moveSpeed;
@@ -519,8 +596,6 @@ const controls = new PointerLockControls( camera, document.body );
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
-
-
 
     animate();
 
