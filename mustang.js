@@ -617,12 +617,12 @@ window.onload = function init() {
 
         if (movement.forward) {
             // 벽과의 충돌을 확인
-            // const isColliding = checkWallCollision();
+            const isColliding = checkWallCollision();
 
             // 벽과의 충돌이 없는 경우에만 카메라의 위치를 변경
-            // if (!isColliding) {
+            if (!isColliding) {
                 camera.position.z += moveSpeed;
-            // }
+            }
         }
         if (movement.backward) {
             camera.position.z -= moveSpeed;
