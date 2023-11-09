@@ -548,6 +548,13 @@ window.onload = function init() {
         if (cameraPositionInWorld.x > -101 && cameraPositionInWorld.x < 0 && cameraPositionInWorld.z > -1089 && cameraPositionInWorld.z < -983) { movement.forward = false; }
 
         // 에레브 장애물 처리 파트
+        if (cameraPositionInWorld.x > 74 && cameraPositionInWorld.x < 233 && cameraPositionInWorld.z > -933 && cameraPositionInWorld.z < -843) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -41 && cameraPositionInWorld.x < 23 && cameraPositionInWorld.z > -957 && cameraPositionInWorld.z < -879) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -164 && cameraPositionInWorld.x < -23 && cameraPositionInWorld.z > -921 && cameraPositionInWorld.z < -828) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -218 && cameraPositionInWorld.x < -119 && cameraPositionInWorld.z > -813 && cameraPositionInWorld.z < -768) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -59 && cameraPositionInWorld.x < -20 && cameraPositionInWorld.z > -747 && cameraPositionInWorld.z < -669) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 35 && cameraPositionInWorld.x < 158 && cameraPositionInWorld.z > -801 && cameraPositionInWorld.z < -777) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 50 && cameraPositionInWorld.x < 245 && cameraPositionInWorld.z > -747 && cameraPositionInWorld.z < -684) { movement.forward = false; }
     }
 
     function handleKeyUp(event) {
@@ -585,12 +592,12 @@ window.onload = function init() {
 
         if (movement.forward) {
             // 벽과의 충돌을 확인
-            const isColliding = checkWallCollision();
+            // const isColliding = checkWallCollision();
 
             // 벽과의 충돌이 없는 경우에만 카메라의 위치를 변경
-            if (!isColliding) {
+            // if (!isColliding) {
                 camera.position.z += moveSpeed;
-            }
+            // }
         }
         if (movement.backward) {
             camera.position.z -= moveSpeed;
