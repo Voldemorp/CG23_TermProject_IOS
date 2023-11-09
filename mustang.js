@@ -21,16 +21,18 @@ window.onload = function init() {
     camera.position.y = 30;
     camera.position.z = -1420;
 
-    camera.rotation.y = Math.PI; // 180도 회전
 
-    const controls = new PointerLockControls(camera, document.body);
+camera.rotation.y = Math.PI; // 180도 회전
 
-    // Pointer Lock를 사용한 마우스 클릭 이벤트 처리
-    document.body.addEventListener("click", () => {
-        if (!controls.isLocked) {
-            controls.lock();
-        }
-    });
+const controls = new PointerLockControls( camera, document.body );
+
+// Pointer Lock를 사용한 마우스 클릭 이벤트 처리
+document.body.addEventListener("click", () => {
+    if (!controls.isLocked) {
+        controls.lock();
+    }
+});
+
 
 
 
@@ -541,9 +543,11 @@ window.onload = function init() {
     //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     //     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
+    
     //     // 레이캐스터를 사용하여 마우스 포인터의 3D 공간 좌표를 얻습니다.
     //     raycaster.setFromCamera(mouse, camera);
     //     const intersects = raycaster.intersectObject(scene, true);
+    
 
     //     // 레이캐스팅 결과가 있는 경우 해당 포인트를 카메라의 타겟으로 설정합니다.
     //     if (intersects.length > 0) {
@@ -561,7 +565,9 @@ window.onload = function init() {
     // }
     function animate() {
         // 사용자 입력에 따라 카메라의 위치 조절
+
         const moveSpeed = 1.5; // 이동 속도 조절
+
         if (movement.forward) {
             camera.position.z += moveSpeed;
         }
@@ -580,6 +586,9 @@ window.onload = function init() {
     }
 
 
+
     animate();
 
 }
+
+
