@@ -299,7 +299,7 @@ window.onload = function init() {
         // 벽의 재질 투명하게
         const material = new THREE.MeshBasicMaterial({
             transparent: true,
-            opacity: 0.5 //0에 가까울수록 더 투명
+            opacity: 0.1 //0에 가까울수록 더 투명
         });
 
         wall.children[0].material = material;
@@ -381,7 +381,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0 //0에 가까울수록 더 투명
+                    opacity: 0.1 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
@@ -402,7 +402,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0 //0에 가까울수록 더 투명
+                    opacity: 0.1 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
@@ -423,7 +423,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0 //0에 가까울수록 더 투명
+                    opacity: 0.1 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
@@ -444,7 +444,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0 //0에 가까울수록 더 투명
+                    opacity: 0.1 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
