@@ -2,6 +2,7 @@ window.onload = function init() {
     const canvas = document.getElementById("gl-canvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    const foundSound = new Audio('model/audio/FoundMaple.mp3');
 
     // 렌더러
     const renderer = new THREE.WebGLRenderer({ canvas });
@@ -21,12 +22,12 @@ window.onload = function init() {
     camera.position.y = 30;
     camera.position.z = -1420;
 
-
     camera.rotation.y = Math.PI; // 180도 회전
 
-const controls = new PointerLockControls( camera, document.body );
-
-// Pointer Lock를 사용한 마우스 클릭 이벤트 처리
+    // 컨트롤
+    const controls = new PointerLockControls( camera, document.body );
+   
+    // Pointer Lock를 사용한 마우스 클릭 이벤트 처리
     document.body.addEventListener("click", () => {
         if (!controls.isLocked) {
             controls.lock();
@@ -330,6 +331,15 @@ const controls = new PointerLockControls( camera, document.body );
         var intersects = raycaster.intersectObject(object, true);
 
         if (intersects.length > 0) {
+
+            // 단풍 찾았을 때 단풍 삭제
+            scene.remove(object);
+            found++;
+
+            // // 단풍잎 발견 효과음
+            foundSound.currentTime = 0; // 재생 위치를 처음으로 되돌림
+            foundSound.play();
+
             // 이미지 엘리먼트 생성
             const image = document.createElement('img');
             image.src = 'mol.png';
@@ -345,9 +355,7 @@ const controls = new PointerLockControls( camera, document.body );
                 document.body.removeChild(image);
             }, 5000);
 
-            // 단풍 찾았을 때 단풍 삭제
-            scene.remove(object);
-            found++;
+            
 
             if (found == 3) {
                 // 에레브 단풍잎 생성
