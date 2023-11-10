@@ -325,6 +325,29 @@ window.onload = function init() {
         console.error(error);
     });
 
+    // ----------이미지 구현 시작---------- //
+
+    const image = document.createElement('img');
+    image.style.position = 'fixed';
+    image.style.top = '50%';
+    image.style.left = '50%';
+    image.style.transform = 'translate(-50%, -50%)';
+    image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+
+    // 이미지 경로 설정
+    image.src = 'message_image/msg_first.png';
+    image.scale = 30;
+
+    // 이미지 추가
+    document.body.appendChild(image);
+
+    //5초 후에 이미지 사라지게 함
+    setTimeout(function () {
+        document.body.removeChild(image);
+    }, 5000);
+
+    // ----------이미지 구현 끝---------- //
+
 
     var found = 1;
     var wallEnabled = true; // 벽의 충돌 감지 상태를 나타내는 변수
@@ -344,18 +367,11 @@ window.onload = function init() {
         if (intersects.length > 0) {
             // 이미지 엘리먼트 생성
             const image = document.createElement('img');
-            image.src = 'mol.png';
-            image.style.position = 'absolute';
-            image.style.top = event.clientY + 'px';
-            image.style.left = event.clientX + 'px';
+            image.style.position = 'fixed';
+            image.style.top = '50%';
+            image.style.left = '50%';
+            image.style.transform = 'translate(-50%, -50%)';
             image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
-
-            document.body.appendChild(image);
-
-            //5초 후에 이미지 사라지게 함
-            setTimeout(function () {
-                document.body.removeChild(image);
-            }, 5000);
 
             // 단풍 찾았을 때 단풍 삭제
             scene.remove(object);         
@@ -367,6 +383,21 @@ window.onload = function init() {
             found++;
 
             if (found == 3) {
+                // ----------이미지 구현 시작---------- //
+
+                // 이미지 경로 설정
+                image.src = 'message_image/msg_primary.png';
+                image.scale = 30;
+
+                // 이미지 추가
+                document.body.appendChild(image);
+
+                //5초 후에 이미지 사라지게 함
+                setTimeout(function () {
+                    document.body.removeChild(image);
+                }, 5000);
+
+                // ----------이미지 구현 끝---------- //
                 
                 // 에레브 단풍잎 생성
                 object.scale.set(5, 5, 5);
@@ -389,6 +420,22 @@ window.onload = function init() {
 
             }
             else if (found == 5) {
+                // ----------이미지 구현 시작---------- //
+
+                // 이미지 경로 설정
+                image.src = 'message_image/msg_ereve.png';
+                image.scale = 30;
+
+                // 이미지 추가
+                document.body.appendChild(image);
+
+                //5초 후에 이미지 사라지게 함
+                setTimeout(function () {
+                    document.body.removeChild(image);
+                }, 5000);
+
+                // ----------이미지 구현 끝---------- //
+
                 //커닝시티 단풍잎 생성
                 object.scale.set(5, 5, 5);
                 object.position.set(-203, 70, -517)
@@ -410,6 +457,22 @@ window.onload = function init() {
 
             }
             else if (found == 7) {
+                // ----------이미지 구현 시작---------- //
+
+                // 이미지 경로 설정
+                image.src = 'message_image/msg_kerning.png';
+                image.scale = 30;
+
+                // 이미지 추가
+                document.body.appendChild(image);
+
+                //5초 후에 이미지 사라지게 함
+                setTimeout(function () {
+                    document.body.removeChild(image);
+                }, 5000);
+
+                // ----------이미지 구현 끝---------- //
+
                 //엘리니아 단풍잎 생성
                 object.scale.set(5, 5, 5);
                 object.position.set(-81, -15, -46)
@@ -431,6 +494,22 @@ window.onload = function init() {
 
             }
             else if (found == 9) {
+                // ----------이미지 구현 시작---------- //
+
+                // 이미지 경로 설정
+                image.src = 'message_image/msg_elinia.png';
+                image.scale = 30;
+
+                // 이미지 추가
+                document.body.appendChild(image);
+
+                //5초 후에 이미지 사라지게 함
+                setTimeout(function () {
+                    document.body.removeChild(image);
+                }, 5000);
+
+                // ----------이미지 구현 끝---------- //
+
                 //아쿠아로드 단풍잎 생성
                 object.scale.set(10, 10, 10);
                 object.position.set(-63, -13, 125)
@@ -449,6 +528,23 @@ window.onload = function init() {
 
                 wall.children[0].material = material;
                 scene.add(wall);
+            }
+            else if (found == 11) {
+                // ----------이미지 구현 시작---------- //
+
+                // 이미지 경로 설정
+                image.src = 'message_image/msg_aquaroad.png';
+                image.scale = 30;
+
+                // 이미지 추가
+                document.body.appendChild(image);
+
+                //5초 후에 이미지 사라지게 함
+                setTimeout(function () {
+                    document.body.removeChild(image);
+                }, 5000);
+
+                // ----------이미지 구현 끝---------- //
             }
             else { }
 
