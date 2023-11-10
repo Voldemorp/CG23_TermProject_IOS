@@ -389,6 +389,7 @@ window.onload = function init() {
             found++;
 
             if (found == 3) {
+
                 // ----------이미지 구현 시작---------- //
 
                 // 이미지 경로 설정
@@ -405,6 +406,7 @@ window.onload = function init() {
 
                 // ----------이미지 구현 끝---------- //
                 
+
                 // 에레브 단풍잎 생성
                 object.scale.set(5, 5, 5);
                 object.position.set(-66, -15, -862)
@@ -413,7 +415,7 @@ window.onload = function init() {
 
                 // 에레브 벽 생성
                 wall.scale.set(1, 600, 280); //두깨, 높이, 너비
-        wall.position.set(20, -15, -650)
+                wall.position.set(20, -15, -650)
                 wall.rotation.y = Math.PI / 2;
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
@@ -450,7 +452,7 @@ window.onload = function init() {
 
                 //커닝시티 벽 생성
                 wall.scale.set(1, 600, 280); //두깨, 높이, 너비
-        wall.position.set(20, -15, -328)
+                wall.position.set(20, -15, -328)
                 wall.rotation.y = Math.PI / 2;
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
@@ -487,7 +489,7 @@ window.onload = function init() {
 
                 //엘리니아 벽 생성
                 wall.scale.set(1, 600, 280); //두깨, 높이, 너비
-        wall.position.set(20, -15, -7)
+                wall.position.set(20, -15, -7)
                 wall.rotation.y = Math.PI / 2;
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
@@ -524,7 +526,7 @@ window.onload = function init() {
 
                 //아쿠아로드 벽 생성
                 wall.scale.set(1, 600, 280); //두깨, 높이, 너비
-        wall.position.set(20, -15, 312)
+                wall.position.set(20, -15, 312)
                 wall.rotation.y = Math.PI / 2;
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
@@ -704,7 +706,7 @@ window.onload = function init() {
     function checkWallCollision() {
         const wallIntersects = [];
         if (!wallEnabled) {
-            wallEnabled=true;
+            wallEnabled = true;
             return false; // 충돌 감지 비활성화 시 항상 false 반환
         }
         wallRaycaster.set(camera.position, new THREE.Vector3(0, 0, -1)); // 카메라 위치에서 앞쪽으로 레이 발사
