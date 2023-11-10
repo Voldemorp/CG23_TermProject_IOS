@@ -2,6 +2,7 @@ window.onload = function init() {
     const canvas = document.getElementById("gl-canvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    const foundSound = new Audio('model/audio/FoundMaple.mp3');
 
     // 렌더러
     const renderer = new THREE.WebGLRenderer({ canvas });
@@ -20,8 +21,9 @@ window.onload = function init() {
     camera.position.z = -1420;
     camera.rotation.y = Math.PI; // 180도 회전
 
-    const controls = new PointerLockControls(camera, document.body);
-
+    // 컨트롤
+    const controls = new PointerLockControls( camera, document.body );
+   
     // Pointer Lock를 사용한 마우스 클릭 이벤트 처리
     document.body.addEventListener("click", () => {
         if (!controls.isLocked) {
@@ -373,9 +375,13 @@ window.onload = function init() {
             image.style.transform = 'translate(-50%, -50%)';
             image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
 
+             // 단풍잎 발견 효과음
+             foundSound.currentTime = 0; // 재생 위치를 처음으로 되돌림
+             foundSound.play();
+ 
             // 단풍 찾았을 때 단풍 삭제
-            scene.remove(object);         
-
+            scene.remove(object);
+            
             wallEnabled = false;
 
             // 단풍 찾았을 때 벽 삭제
