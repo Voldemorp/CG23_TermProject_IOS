@@ -327,28 +327,66 @@ window.onload = function init() {
         console.error(error);
     });
 
-    // ----------이미지 구현 시작---------- //
+    const video = document.createElement('video');
+    video.style.position = 'fixed';
+    video.style.top = '0';
+    video.style.left = '0';
+    video.style.width = '100%'; // Set width to 100% of viewport
+    video.style.height = '100%'; // Set height to 100% of viewport
+    video.style.objectFit = 'cover'; 
+    video.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+    video.preload = 'auto';
 
-    const image = document.createElement('img');
-    image.style.position = 'fixed';
-    image.style.top = '50%';
-    image.style.left = '50%';
-    image.style.transform = 'translate(-50%, -50%)';
-    image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+          video.play();
+        }
+      });
+
+    // 비디오 초기화 및 재생 함수
+    function initVideoPlayback() {
+    video.play().then(() => {
+
+    }).catch(error => {
+        console.error('Failed to play the video:', error);
+    });
+    }
 
     // 이미지 경로 설정
-    image.src = 'message_image/msg_first.png';
-    image.scale = 30;
+    video.src = 'video/startvideo.mp4';
 
     // 이미지 추가
-    document.body.appendChild(image);
+    document.body.appendChild(video);
 
-    //5초 후에 이미지 사라지게 함
+    // 비디오 끝난 후에 사라지도록 구현
     setTimeout(function () {
-        document.body.removeChild(image);
-    }, 5000);
+        document.body.removeChild(video);
+
+        // ----------이미지 구현 시작---------- //
+
+        const image = document.createElement('img');
+        image.style.position = 'fixed';
+        image.style.top = '50%';
+        image.style.left = '50%';
+        image.style.transform = 'translate(-50%, -50%)';
+        image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+
+        // 이미지 경로 설정
+        image.src = 'message_image/msg_first.png';
+
+        // 이미지 추가
+        document.body.appendChild(image);
+
+        //5초 후에 이미지 사라지게 함
+        setTimeout(function () {
+            document.body.removeChild(image);
+        }, 5000);
 
     // ----------이미지 구현 끝---------- //
+
+    }, 14000);
+
+    
 
 
     var found = 1;
