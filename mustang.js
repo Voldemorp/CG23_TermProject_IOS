@@ -15,13 +15,9 @@ window.onload = function init() {
     // 카메라
     // 나중에 가장 마지막 파라미터 300으로 조정 (시야 조정)
     const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 3000);
-    // camera.rotation.x = 125 / 180 * Math.PI;
-    // camera.rotation.y =ZA 90 / 180 * Math.PI;
     camera.position.x = 12;
     camera.position.y = 30;
     camera.position.z = -1420;
-
-
     camera.rotation.y = Math.PI; // 180도 회전
 
     const controls = new PointerLockControls(camera, document.body);
@@ -385,7 +381,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0.5 //0에 가까울수록 더 투명
+                    opacity: 0 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
@@ -406,7 +402,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0.5 //0에 가까울수록 더 투명
+                    opacity: 0 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
@@ -427,7 +423,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0.5 //0에 가까울수록 더 투명
+                    opacity: 0 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
@@ -448,7 +444,7 @@ window.onload = function init() {
                 // 벽의 재질 투명하게
                 const material = new THREE.MeshBasicMaterial({
                     transparent: true,
-                    opacity: 0.5 //0에 가까울수록 더 투명
+                    opacity: 0 //0에 가까울수록 더 투명
                 });
 
                 wall.children[0].material = material;
@@ -458,14 +454,6 @@ window.onload = function init() {
 
         }
     }
-
-    /*const obstacleGeometry = new THREE.BoxGeometry(5, 5, 5); // 장애물의 크기 조절
-    //const obstacleTexture = new THREE.TextureLoader().load('./path/to/obstacle_texture.jpg'); // 장애물의 텍스처 로딩
-    const obstacleMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // 장애물의 재질 정의
-
-    const obstacleMesh = new THREE.Mesh(obstacleGeometry, obstacleMaterial); // 장애물의 메쉬 생성
-    obstacleMesh.position.set(12, 10, -360); // 장애물의 위치 설정 (x, y, z)
-    scene.add(obstacleMesh); // 씬에 장애물 추가*/
 
     const movement = {
         forward: false,
@@ -534,8 +522,65 @@ window.onload = function init() {
                 sound.play();
             });
         }
-    }
 
+        // ----------벽 충돌 감지 파트 시작---------- //
+
+        // 오른쪽 벽과의 충돌 확인
+        if (cameraPositionInWorld.x < -213) { movement.right = false; }
+        // 왼쪽 벽과의 충돌 확인
+        else if (cameraPositionInWorld.x > 242) { movement.left = false; }
+        // 시작 맵 뒷쪽 벽과의 충돌 확인
+        else if (cameraPositionInWorld.z < -1419.99) { movement.backward = false; }
+        // 아쿠아로드 앞쪽 벽과의 충돌 확인
+        else if (cameraPositionInWorld.z > 304.99) { movement.forward = false; }
+
+        // ----------벽 충돌 감지 파트 끝---------- //
+
+        // ----------장애물 충돌 감지 파트 시작---------- //
+
+        // 시작화면 장애물 처리 파트
+        if (cameraPositionInWorld.x > 60 && cameraPositionInWorld.z > -1372 && cameraPositionInWorld.x < 248 && cameraPositionInWorld.z < -1320) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -206 && cameraPositionInWorld.x < -68 && cameraPositionInWorld.z > -1293 && cameraPositionInWorld.z < -1234) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -125 && cameraPositionInWorld.x < -14 && cameraPositionInWorld.z > -1221 && cameraPositionInWorld.z < -1152) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 60 && cameraPositionInWorld.x < 221 && cameraPositionInWorld.z > -1250 && cameraPositionInWorld.z < -1158) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 95 && cameraPositionInWorld.x < 242 && cameraPositionInWorld.z > -1116 && cameraPositionInWorld.z < -983) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -210 && cameraPositionInWorld.x < -100 && cameraPositionInWorld.z > -1123 && cameraPositionInWorld.z < -983) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -101 && cameraPositionInWorld.x < 0 && cameraPositionInWorld.z > -1089 && cameraPositionInWorld.z < -983) { movement.forward = false; }
+
+        // 에레브 장애물 처리 파트
+        if (cameraPositionInWorld.x > 74 && cameraPositionInWorld.x < 233 && cameraPositionInWorld.z > -933 && cameraPositionInWorld.z < -843) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -41 && cameraPositionInWorld.x < 23 && cameraPositionInWorld.z > -957 && cameraPositionInWorld.z < -879) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -164 && cameraPositionInWorld.x < -23 && cameraPositionInWorld.z > -921 && cameraPositionInWorld.z < -828) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -218 && cameraPositionInWorld.x < -119 && cameraPositionInWorld.z > -813 && cameraPositionInWorld.z < -768) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -59 && cameraPositionInWorld.x < -20 && cameraPositionInWorld.z > -747 && cameraPositionInWorld.z < -669) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 35 && cameraPositionInWorld.x < 158 && cameraPositionInWorld.z > -801 && cameraPositionInWorld.z < -777) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 50 && cameraPositionInWorld.x < 245 && cameraPositionInWorld.z > -747 && cameraPositionInWorld.z < -684) { movement.forward = false; }
+
+        // 커닝시티 장애물 처리 파트
+        if (cameraPositionInWorld.x > -104 && cameraPositionInWorld.x < 6 && cameraPositionInWorld.z > -579 && cameraPositionInWorld.z < -474) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -224 && cameraPositionInWorld.x < -119 && cameraPositionInWorld.z > -564 && cameraPositionInWorld.z < -474) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 32 && cameraPositionInWorld.x < 179 && cameraPositionInWorld.z > -606 && cameraPositionInWorld.z < -525) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 119 && cameraPositionInWorld.x < 182 && cameraPositionInWorld.z > -660 && cameraPositionInWorld.z < -582) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 68 && cameraPositionInWorld.x < 242 && cameraPositionInWorld.z > -471 && cameraPositionInWorld.z < -444) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -41 && cameraPositionInWorld.x < -20 && cameraPositionInWorld.z > -423 && cameraPositionInWorld.z < -408) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -215 && cameraPositionInWorld.x < -167 && cameraPositionInWorld.z > -423 && cameraPositionInWorld.z < -360) { movement.forward = false; }
+
+        // 엘리니아 장애물 처리 파트
+        if (cameraPositionInWorld.x > -110 && cameraPositionInWorld.x < -47 && cameraPositionInWorld.z > -331 && cameraPositionInWorld.z < -330) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -8 && cameraPositionInWorld.x < 122 && cameraPositionInWorld.z > -258 && cameraPositionInWorld.z < -180) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 128 && cameraPositionInWorld.x < -50 && cameraPositionInWorld.z > -324 && cameraPositionInWorld.z < -259) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 164 && cameraPositionInWorld.x < 266 && cameraPositionInWorld.z > -159 && cameraPositionInWorld.z < -114) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -224 && cameraPositionInWorld.x < -44 && cameraPositionInWorld.z > -240 && cameraPositionInWorld.z < -24) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 29 && cameraPositionInWorld.x < 104 && cameraPositionInWorld.z > -108 && cameraPositionInWorld.z < -45) { movement.forward = false; }
+
+        // 아쿠아로드 장애물 처리 파트
+        if (cameraPositionInWorld.x > -217 && cameraPositionInWorld.x < -175 && cameraPositionInWorld.z > -9 && cameraPositionInWorld.z < 16) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -150 && cameraPositionInWorld.x < 129 && cameraPositionInWorld.z > 100 && cameraPositionInWorld.z < 157) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 48 && cameraPositionInWorld.x < 141 && cameraPositionInWorld.z > 34 && cameraPositionInWorld.z < 49) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 204 && cameraPositionInWorld.x < 264 && cameraPositionInWorld.z > 64 && cameraPositionInWorld.z < 88) { movement.forward = false; }
+        if (cameraPositionInWorld.x > 201 && cameraPositionInWorld.x < 243 && cameraPositionInWorld.z > 163 && cameraPositionInWorld.z < 200) { movement.forward = false; }
+        if (cameraPositionInWorld.x > -213 && cameraPositionInWorld.x < 255 && cameraPositionInWorld.z > 215 && cameraPositionInWorld.z < 319) { movement.forward = false; }
+    }
 
     function handleKeyUp(event) {
         const code = event.code;
@@ -553,7 +598,6 @@ window.onload = function init() {
     // 벽과 카메라의 충돌을 검사하기 위한 레이캐스터 생성
     const wallRaycaster = new THREE.Raycaster();
 
-
     // 벽과 카메라의 충돌을 검사하는 함수
     function checkWallCollision() {
         const wallIntersects = [];
@@ -566,9 +610,6 @@ window.onload = function init() {
 
         return wallIntersects.length > 0;
     }
-
-
-
 
     function animate() {
         // 사용자 입력에 따라 카메라의 위치 조절
@@ -598,7 +639,4 @@ window.onload = function init() {
     }
 
     animate();
-
 }
-
-
