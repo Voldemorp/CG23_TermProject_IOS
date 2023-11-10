@@ -47,9 +47,9 @@ window.onload = function init() {
     const primaryTextureArr = [];
 
     // 텍스쳐 생성
-    const primaryTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-    const primaryTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const primaryTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const primaryTexture_lf = new THREE.TextureLoader().load('./background_image/Start_side.png'); // 텍스쳐 왼쪽 배경
+    const primaryTexture_rt = new THREE.TextureLoader().load('./background_image/Start_side.png'); // 텍스쳐 오른쪽 배경
+    const primaryTexture_up = new THREE.TextureLoader().load('./background_image/Start_up.png'); // 텍스쳐 윗배경
     const primaryTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
     const primaryTexture_bk = new THREE.TextureLoader().load('./background_image/primary_bk.jpg'); // 텍스쳐 뒷배경
 
@@ -88,9 +88,9 @@ window.onload = function init() {
     const ereveTextureArr = [];
 
     // 텍스쳐 생성
-    const ereveTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-    const ereveTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const ereveTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const ereveTexture_lf = new THREE.TextureLoader().load('./background_image/Ereve_side.png'); // 텍스쳐 왼쪽 배경
+    const ereveTexture_rt = new THREE.TextureLoader().load('./background_image/Ereve_side.png'); // 텍스쳐 오른쪽 배경
+    const ereveTexture_up = new THREE.TextureLoader().load('./background_image/Ereve_up.png'); // 텍스쳐 윗배경
     const ereveTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
 
     // 배열에 각각의 텍스쳐 추가
@@ -128,9 +128,9 @@ window.onload = function init() {
     const kerningTextureArr = [];
 
     // 텍스쳐 생성
-    const kerningTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-    const kerningTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const kerningTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const kerningTexture_lf = new THREE.TextureLoader().load('./background_image/KerningCity_side.png'); // 텍스쳐 왼쪽 배경
+    const kerningTexture_rt = new THREE.TextureLoader().load('./background_image/KerningCity_side.png'); // 텍스쳐 오른쪽 배경
+    const kerningTexture_up = new THREE.TextureLoader().load('./background_image/KerningCity_up.png'); // 텍스쳐 윗배경
     const kerningTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
 
     // 배열에 각각의 텍스쳐 추가
@@ -168,9 +168,9 @@ window.onload = function init() {
     const eliniaTextureArr = [];
 
     // 텍스쳐 생성
-    const eliniaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-    const eliniaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const eliniaTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const eliniaTexture_lf = new THREE.TextureLoader().load('./background_image/Elinia_side.png'); // 텍스쳐 왼쪽 배경
+    const eliniaTexture_rt = new THREE.TextureLoader().load('./background_image/Elinia_side.png'); // 텍스쳐 오른쪽 배경
+    const eliniaTexture_up = new THREE.TextureLoader().load('./background_image/Elinia_up.png'); // 텍스쳐 윗배경
     const eliniaTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
 
     // 배열에 각각의 텍스쳐 추가
@@ -207,11 +207,11 @@ window.onload = function init() {
     const aquaTextureArr = [];
 
     // 텍스쳐 생성
-    const aquaTexture_lf = new THREE.TextureLoader().load('./background_image/primary_lf.jpg'); // 텍스쳐 왼쪽 배경
-    const aquaTexture_rt = new THREE.TextureLoader().load('./background_image/primary_rt.jpg'); // 텍스쳐 오른쪽 배경
-    const aquaTexture_up = new THREE.TextureLoader().load('./background_image/primary_up.jpg'); // 텍스쳐 윗배경
+    const aquaTexture_lf = new THREE.TextureLoader().load('./background_image/AquaRoad_side.jpg'); // 텍스쳐 왼쪽 배경
+    const aquaTexture_rt = new THREE.TextureLoader().load('./background_image/AquaRoad_side.jpg'); // 텍스쳐 오른쪽 배경
+    const aquaTexture_up = new THREE.TextureLoader().load('./background_image/AquaRoad_up.png'); // 텍스쳐 윗배경
     const aquaTexture_dn = new THREE.TextureLoader().load('./background_image/primary_dn.jpg'); // 텍스쳐 아랫배경
-    const aquaTexture_ft = new THREE.TextureLoader().load('./background_image/primary_ft.jpg'); // 텍스쳐 앞배경
+    const aquaTexture_ft = new THREE.TextureLoader().load('./background_image/AquaRoad_back.jpeg'); // 텍스쳐 앞배경
 
     // 배열에 각각의 텍스쳐 추가
     aquaTextureArr.push(new THREE.MeshStandardMaterial({ map: aquaTexture_lf }));
@@ -327,28 +327,66 @@ window.onload = function init() {
         console.error(error);
     });
 
-    // ----------이미지 구현 시작---------- //
+    const video = document.createElement('video');
+    video.style.position = 'fixed';
+    video.style.top = '0';
+    video.style.left = '0';
+    video.style.width = '100%'; // Set width to 100% of viewport
+    video.style.height = '100%'; // Set height to 100% of viewport
+    video.style.objectFit = 'cover'; 
+    video.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+    video.preload = 'auto';
 
-    const image = document.createElement('img');
-    image.style.position = 'fixed';
-    image.style.top = '50%';
-    image.style.left = '50%';
-    image.style.transform = 'translate(-50%, -50%)';
-    image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+          video.play();
+        }
+      });
+
+    // 비디오 초기화 및 재생 함수
+    function initVideoPlayback() {
+    video.play().then(() => {
+
+    }).catch(error => {
+        console.error('Failed to play the video:', error);
+    });
+    }
 
     // 이미지 경로 설정
-    image.src = 'message_image/msg_first.png';
-    image.scale = 30;
+    video.src = 'video/startvideo.mp4';
 
     // 이미지 추가
-    document.body.appendChild(image);
+    document.body.appendChild(video);
 
-    //5초 후에 이미지 사라지게 함
+    // 비디오 끝난 후에 사라지도록 구현
     setTimeout(function () {
-        document.body.removeChild(image);
-    }, 5000);
+        document.body.removeChild(video);
+
+        // ----------이미지 구현 시작---------- //
+
+        const image = document.createElement('img');
+        image.style.position = 'fixed';
+        image.style.top = '50%';
+        image.style.left = '50%';
+        image.style.transform = 'translate(-50%, -50%)';
+        image.style.pointerEvents = 'none'; // 이미지가 마우스 이벤트를 가로채지 않도록 설정
+
+        // 이미지 경로 설정
+        image.src = 'message_image/msg_first.png';
+
+        // 이미지 추가
+        document.body.appendChild(image);
+
+        //5초 후에 이미지 사라지게 함
+        setTimeout(function () {
+            document.body.removeChild(image);
+        }, 5000);
 
     // ----------이미지 구현 끝---------- //
+
+    }, 14000);
+
+    
 
 
     var found = 1;
@@ -597,13 +635,13 @@ window.onload = function init() {
 
 
         // z 좌표에 따라 다른 배경음악 재생
-        if (cameraPositionInWorld.z < -1019) {
+        if (cameraPositionInWorld.z < -950) {
             newAudioFilePath = './model/audio/Title.mp3';
-        } else if (cameraPositionInWorld.z < -700) {
+        } else if (cameraPositionInWorld.z < -640) {
             newAudioFilePath = './model/audio/Ereve.mp3';
-        } else if (cameraPositionInWorld.z < -349) {
+        } else if (cameraPositionInWorld.z < -325) {
             newAudioFilePath = './model/audio/KerningCity.mp3';
-        } else if (cameraPositionInWorld.z < -50) {
+        } else if (cameraPositionInWorld.z < -4) {
             newAudioFilePath = './model/audio/Elinia.mp3';
         } else
             newAudioFilePath = './model/audio/AquaRoad.mp3';
