@@ -21,13 +21,14 @@
 
   # Demonstration Video
   영상을 클릭하시면 유튜브 페이지로 이동합니다.
+
   <p align="center">
-  <a href="https://youtu.be/uP8lAAXJa2A?si=5SkfkPMvHtmXSHuu"><img alt="ios" src="https://github.com/Voldemorp/CG23_TermProject_IOS/assets/80394340/26b34bd6-5f46-44b3-b160-8a8065a5c064"></a>
+  <a href="https://www.youtube.com/watch?v=uP8lAAXJa2A"><img alt="PortUS" src="http://img.youtube.com/vi/uP8lAAXJa2A/0.jpg"></a>
   </p>
   <br>
 
   # Tech Stack
-   <br>
+  <br>
    
   ![stack](https://github.com/Voldemorp/CG23_TermProject_IOS/assets/80394340/deb8188b-b1f8-4c02-868d-3a7e95312a8e)
 
